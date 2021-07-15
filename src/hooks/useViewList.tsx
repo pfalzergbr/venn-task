@@ -1,10 +1,9 @@
 import { useReducer } from 'react';
-import {
-  initialViewState,
-  ViewActionTypes,
-  viewReducer,
-} from '../Reducers/viewListReducer';
+import { ViewActionTypes, viewReducer } from '../Reducers/viewListReducer';
+import { mockData } from '../test-utils/data/mockData';
 import { ViewTypes } from '../Types/ViewTypes';
+
+export const initialViewState = mockData;
 
 export const useViewList = (): {
   viewList: ViewTypes[];

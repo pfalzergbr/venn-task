@@ -1,7 +1,8 @@
 import { Carousel } from 'react-responsive-carousel';
 import { IVImageCarousel } from '../../Types/ViewTypes';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { v4 as uuidv4 } from 'uuid';
 import Card from '../UI/Card';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export interface VImageCarouselProps {
   viewData: IVImageCarousel;
@@ -32,7 +33,7 @@ const VImageCarousel: React.FC<VImageCarouselProps> = ({ viewData }) => {
     <Card style={divStyle}>
       <Carousel showThumbs={false}>
         {images.map(image => (
-          <div style={imageContainerStyle}>
+          <div key={uuidv4()} style={imageContainerStyle}>
             <img
               style={imageStyle}
               src={image}

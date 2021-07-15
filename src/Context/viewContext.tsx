@@ -4,24 +4,27 @@ import { ViewTypes } from '../Types/ViewTypes';
 import { ViewActionTypes } from '../Reducers/viewListReducer';
 
 export interface IViewContext {
-  viewList: ViewTypes[];
+  viewData: ViewTypes[];
   dispatch: React.Dispatch<ViewActionTypes>;
 }
 
-export const ViewContext = createContext<IViewContext>({} as IViewContext);
+export const ViewContext = createContext<IViewContext>({
+  viewData: [],
+  dispatch: () => {},
+} as IViewContext);
 
 export interface ViewProviderProps {
   children: React.ReactNode;
 }
 
-const ViewProvider: React.FC<ViewProviderProps> = ({ children }) => {
+export const ViewProvider = ({ children }: { children: React.ReactNode }) => {
   const { viewList, dispatch } = useViewList();
 
   return (
-    <ViewContext.Provider value={{ viewList, dispatch }}>
+    <ViewContext.Provider value={{ viewData: viewList, dispatch }}>
       {children}
     </ViewContext.Provider>
   );
 };
 
-export default ViewProvider;
+// export default ViewProvider;

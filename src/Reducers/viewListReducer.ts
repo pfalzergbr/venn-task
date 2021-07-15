@@ -1,8 +1,6 @@
 import { Reducer } from 'react';
-import { mockData } from '../test-utils/data/mockData';
-import { ViewTypes } from '../Types/ViewTypes';
 
-export const initialViewState = mockData;
+import { ViewTypes } from '../Types/ViewTypes';
 
 export type ViewActionTypes = { type: 'ADD_VIEW'; payload: ViewTypes };
 
