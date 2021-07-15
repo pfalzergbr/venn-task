@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 // import { ViewTypes } from '../Types/ViewTypes';
 import AddTextBoxModal from './UI/Modals/AddTextBoxModal';
 import AddImageModal from './UI/Modals/AddImageModal';
+import AddCarouselModal from './UI/Modals/AddCarouselModal';
 
 export interface ViewControlButtonsProps {}
 
@@ -37,6 +38,7 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
       <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
         {modalType === 'textbox' && <AddTextBoxModal closeModal={closeModal} />}
         {modalType === 'image' && <AddImageModal closeModal={closeModal} />}
+        {modalType === 'carousel' && <AddCarouselModal closeModal={closeModal} />}
       </Modal>
       <button onClick={() => openModal('textbox')}>Add Texbox</button>
       <button onClick={() => openModal('image')}>Add Image</button>
