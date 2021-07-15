@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { ViewContext } from '../../../Context/viewContext';
 import { TwitterPicker } from 'react-color';
 import { ViewTypes } from '../../../Types/ViewTypes';
+import { createVTextBox } from '../../../Utils/createVTextBox';
 
 export interface AddTextBoxModalProps {
   closeModal: () => void;
@@ -31,9 +32,14 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({ closeModal }) => {
   };
 
   const onSubmit = (data: any) => {
-    const newView = { ...data, backroundColor, fontColor };
+    const newView = createVTextBox({
+      ...data,
+      backgroundColor: { hex: backroundColor },
+      fontColor: { hex: fontColor },
+    });
     console.log(newView);
-    // dispatch({ type: 'ADD_VIEW', payload: newView as ViewTypes });
+    dispatch({ type: 'ADD_VIEW', payload: newView });
+    closeModal();
   };
 
   // Todo - Extract input fields
@@ -68,6 +74,16 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({ closeModal }) => {
             min="1"
             max="50"
             {...register('fontSize', { required: true })}
+          />
+        </div>
+        <div>
+          <label htmlFor="padding">Padding</label>
+          <input
+            type="number"
+            step="1"
+            min="1"
+            max="50"
+            {...register('padding', { required: true })}
           />
         </div>
         <div>
