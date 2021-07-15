@@ -6,6 +6,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export interface VImageCarouselProps {
   viewData: IVImageCarousel;
+  index: number;
 }
 
 // View component, rendering a carousel.

@@ -14,13 +14,17 @@ export interface ViewListProps {
 const ViewList: React.FC<ViewListProps> = ({ viewData }) => {
   return (
     <div>
-      {viewData.map(view => {
+      {viewData.map((view, index) => {
         if (view.moduleType === 'VTextBox')
-          return <VTextBox key={uuidv4()} viewData={view} />;
+          return <VTextBox key={uuidv4()} viewData={view} index={index} />;
         else if (view.moduleType === 'VImageWithPadding')
-          return <VImageWithPadding key={uuidv4()} viewData={view} />;
+          return (
+            <VImageWithPadding key={uuidv4()} viewData={view} index={index} />
+          );
         else if (view.moduleType === 'VImageCarousel')
-          return <VImageCarousel key={uuidv4()} viewData={view} />;
+          return (
+            <VImageCarousel key={uuidv4()} viewData={view} index={index} />
+          );
         return null;
       })}
     </div>

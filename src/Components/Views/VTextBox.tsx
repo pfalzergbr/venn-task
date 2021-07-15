@@ -3,6 +3,7 @@ import Card from '../UI/Card';
 
 export interface VTextBoxProps {
   viewData: IVTextBox;
+  index: number;
 }
 
 const VTextBox: React.FC<VTextBoxProps> = ({ viewData }) => {

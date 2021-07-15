@@ -3,6 +3,7 @@ import Card from '../UI/Card';
 
 export interface VImageWithPaddingProps {
   viewData: IVImageWithPadding;
+  index: number;
 }
 
 // View component, rendering image Views.
