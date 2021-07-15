@@ -3,21 +3,26 @@ import Modal from 'react-modal';
 // import { ViewContext } from '../Context/viewContext';
 // import { mockView } from '../test-utils/data/mockData';
 // import { ViewTypes } from '../Types/ViewTypes';
-import AddViewModal from './UI/Modals/AddTextBoxModal';
+import AddTextBoxModal from './UI/Modals/AddTextBoxModal';
+import AddImageModal from './UI/Modals/AddImageModal';
 
 export interface ViewControlButtonsProps {}
+
+export type ModalType = 'textbox' | 'image' | 'carousel';
 
 // Button container to control ViewList
 const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
   // const { dispatch } = useContext(ViewContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  const [modalType, setModalType] = useState<ModalType>('textbox');
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const openModal = (modalType: ModalType) => {
+    setModalType(modalType);
+    setIsModalOpen(true);
   };
 
   // const addView = (view: ViewTypes) => {
@@ -30,9 +35,12 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
   return (
     <div>
       <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
-        <AddViewModal closeModal={closeModal} />
+        {modalType === 'textbox' && <AddTextBoxModal closeModal={closeModal} />}
+        {modalType === 'image' && <AddImageModal closeModal={closeModal} />}
       </Modal>
-      <button onClick={openModal}>Add View</button>
+      <button onClick={() => openModal('textbox')}>Add Texbox</button>
+      <button onClick={() => openModal('image')}>Add Image</button>
+      <button onClick={() => openModal('carousel')}>Add Carausel</button>
       <button>Delete Marked Views</button>
     </div>
   );
