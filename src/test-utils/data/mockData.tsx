@@ -64,4 +64,5 @@ export const mockView: ViewTypes = {
       hex: '#000000',
     },
   },
+  isMarked: true,
 };

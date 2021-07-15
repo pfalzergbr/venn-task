@@ -16,6 +16,8 @@ export type LinkType = {
 
 export interface IView {
   moduleType: ModuleType;
+  isMarked?: boolean;
+  // Added field for the reducer, to be able to mark multiple fields for deletion.
 }
 
 export type ViewTypes = IVTextBox | IVImageWithPadding | IVImageCarousel;
