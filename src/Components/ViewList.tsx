@@ -15,7 +15,8 @@ const ViewList: React.FC<ViewListProps> = ({ viewData }) => {
   return (
     <div>
       {viewData.map(view => {
-        if (view.moduleType === 'VTextBox') return <VTextBox key={uuidv4()} />;
+        if (view.moduleType === 'VTextBox')
+          return <VTextBox key={uuidv4()} viewData={view} />;
         else if (view.moduleType === 'VImageWithPadding')
           return <VImageWithPadding key={uuidv4()} />;
         else if (view.moduleType === 'VImageCarousel')
