@@ -4,17 +4,21 @@ export type TextAlignmentType = 'left' | 'right' | 'center' | 'justify';
 export type BackgroundColorType = {
   hex: string;
 };
+
 export type FontcolorType = {
   hex: string;
 };
+
 export type LinkType = {
   payload: string;
   type: string;
 };
 
 export interface IView {
-  moduleType: string;
+  moduleType: ModuleType;
 }
+
+export type ViewTypes = IVTextBox | IVImageWithPadding | IVImageCarousel;
 
 export interface IVTextBox extends IView {
   moduleType: 'VTextBox';
@@ -30,7 +34,7 @@ export interface IVTextBox extends IView {
 }
 
 export interface IVImageWithPadding {
-  modulType: 'VImageWithPadding';
+  moduleType: 'VImageWithPadding';
   attributes: {
     padding: number;
     backgroundColor: BackgroundColorType;
