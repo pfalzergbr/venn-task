@@ -1,6 +1,5 @@
-export interface FooterProps {}
-
-const Footer: React.FC<FooterProps> = () => {
+// Component to render the footer
+const Footer: React.FC = () => {
   return (
     <footer>
       <p>Created for Venn Apps Frontend Challenge by Gabor Pfalzer</p>

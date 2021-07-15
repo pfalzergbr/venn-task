@@ -1,6 +1,4 @@
-export interface HeaderProps {}
-
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC = () => {
   return (
     <header>
       <h1>The View List</h1>
