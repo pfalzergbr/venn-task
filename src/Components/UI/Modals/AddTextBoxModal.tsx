@@ -1,13 +1,18 @@
+import { useState } from 'react';
 import { useForm, useFormState } from 'react-hook-form';
 import { useContext } from 'react';
 import { ViewContext } from '../../../Context/viewContext';
+import { TwitterPicker } from 'react-color';
 import { ViewTypes } from '../../../Types/ViewTypes';
 
 export interface AddTextBoxModalProps {
   closeModal: () => void;
 }
 
+//Todo - Refactor this when ready
 const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({ closeModal }) => {
+  const [backroundColor, setBackgroundColor] = useState('#000000');
+  const [fontColor, setFontColor] = useState('#000000');
   const { dispatch } = useContext(ViewContext);
   const {
     register,
@@ -17,9 +22,17 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({ closeModal }) => {
   } = useForm({ mode: 'onChange' });
   const { isValid } = useFormState({ control });
 
+  const handleBackgroundColorChange = (color: any) => {
+    setBackgroundColor(color.hex);
+  };
+
+  const handleFontColorChange = (color: any) => {
+    setFontColor(color.hex);
+  };
+
   const onSubmit = (data: any) => {
-    console.log(data);
-    // const newView = {};
+    const newView = { ...data, backroundColor, fontColor };
+    console.log(newView);
     // dispatch({ type: 'ADD_VIEW', payload: newView as ViewTypes });
   };
 
@@ -60,6 +73,20 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({ closeModal }) => {
         <div>
           <label htmlFor="capitalised">Capitalised</label>
           <input type="checkbox" {...register('capitalised')} />
+        </div>
+        <div>
+          <label htmlFor="backgroundColor">Background Color</label>
+          <TwitterPicker
+            color={backroundColor}
+            onChangeComplete={handleBackgroundColorChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="backgroundColor">Font Color</label>
+          <TwitterPicker
+            color={fontColor}
+            onChangeComplete={handleFontColorChange}
+          />
         </div>
         <div>
           <button type="button" onClick={closeModal}>
