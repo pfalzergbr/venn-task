@@ -48,3 +48,20 @@ export const mockData: ViewTypes[] = [
     heightMultiplier: 1.25,
   },
 ];
+
+export const mockView: ViewTypes = {
+  moduleType: 'VTextBox',
+  attributes: {
+    padding: 18,
+    backgroundColor: {
+      hex: 'green',
+    },
+    bodyText: '15% Discount on all items',
+    textAlignment: 'left',
+    fontSize: 14,
+    capitalised: true,
+    fontColor: {
+      hex: '#000000',
+    },
+  },
+};
