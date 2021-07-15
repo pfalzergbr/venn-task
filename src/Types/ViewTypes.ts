@@ -1,6 +1,6 @@
 export type ModuleType = 'VTextBox' | 'VImageWithPadding' | 'VImageCarousel';
 
-export type TextAlignmentType = 'left' | 'right' | 'center' | 'justify';
+export type TextAlignmentType = 'left' | 'right' | 'center';
 export type BackgroundColorType = {
   hex: string;
 };
