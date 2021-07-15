@@ -20,7 +20,7 @@ const ViewList: React.FC<ViewListProps> = ({ viewData }) => {
         else if (view.moduleType === 'VImageWithPadding')
           return <VImageWithPadding key={uuidv4()} viewData={view} />;
         else if (view.moduleType === 'VImageCarousel')
-          return <VImageCarousel key={uuidv4()} />;
+          return <VImageCarousel key={uuidv4()} viewData={view} />;
         return null;
       })}
     </div>
