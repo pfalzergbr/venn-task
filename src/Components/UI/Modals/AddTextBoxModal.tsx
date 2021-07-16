@@ -4,23 +4,36 @@ import { useContext } from 'react';
 import { ViewContext } from '../../../Context/viewContext';
 import { TwitterPicker } from 'react-color';
 import { createVTextBox } from '../../../Utils/createVTextBox';
+import { VTextBoxAttributes } from '../../../Types/ViewTypes';
 
 export interface AddTextBoxModalProps {
   closeModal: () => void;
+  textBoxAttributes?: VTextBoxAttributes;
 }
 
 //Todo - Refactor this when ready
-const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({ closeModal }) => {
+const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
+  closeModal,
+  textBoxAttributes = {},
+}) => {
   const [backroundColor, setBackgroundColor] = useState('#000000');
   const [fontColor, setFontColor] = useState('#000000');
   const { dispatch } = useContext(ViewContext);
+
+  const defaultValues = {
+    bodyText: textBoxAttributes.bodyText || '',
+    textAlignment: textBoxAttributes.textAlignment || 'left',
+    fontSize: textBoxAttributes.fontSize || 16,
+    padding: textBoxAttributes.padding || 16,
+    capitalised: textBoxAttributes.capitalised || true,
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm({ mode: 'onChange' });
+  } = useForm({ mode: 'onChange', defaultValues });
   const { isValid } = useFormState({ control });
 
   const handleBackgroundColorChange = (color: any) => {

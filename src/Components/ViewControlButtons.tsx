@@ -47,4 +47,6 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
   );
 };
 
+Modal.setAppElement('#root');
+
 export default ViewControlButtons;
