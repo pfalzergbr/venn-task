@@ -4,6 +4,7 @@ import { ViewTypes } from '../../Types/ViewTypes';
 // and use in development process before data fetching is wired up.
 export const mockData: ViewTypes[] = [
   {
+    id: '1',
     moduleType: 'VTextBox',
     attributes: {
       padding: 14,
@@ -20,6 +21,7 @@ export const mockData: ViewTypes[] = [
     },
   },
   {
+    id: '2',
     moduleType: 'VImageWithPadding',
     attributes: {
       padding: 0,
@@ -36,6 +38,7 @@ export const mockData: ViewTypes[] = [
     heightMultiplier: 1.25,
   },
   {
+    id: '3',
     moduleType: 'VImageCarousel',
     attributes: {
       padding: 0,

@@ -16,6 +16,7 @@ export type LinkType = {
 export type ViewTypes = IVTextBox | IVImageWithPadding | IVImageCarousel;
 
 export interface IView {
+  id?: string;
   moduleType: ModuleType;
   isMarked?: boolean;
   // Added field for the reducer, to be able to mark multiple fields for deletion.
@@ -44,17 +45,20 @@ export interface VImageCarouselAttributes {
 }
 
 export interface IVTextBox extends IView {
+  id?: string;
   moduleType: 'VTextBox';
   attributes: VTextBoxAttributes;
 }
 
 export interface IVImageWithPadding {
+  id?: string;
   moduleType: 'VImageWithPadding';
   attributes: VImageWithPaddingAttributes;
   heightMultiplier: number;
 }
 
 export interface IVImageCarousel {
+  id?: string;
   moduleType: 'VImageCarousel';
   attributes: VImageCarouselAttributes;
   heightMultiplier: number;
