@@ -63,10 +63,7 @@ const CardButtons: React.FC<CardButtonsProps> = ({ view }) => {
       </Modal>
       <button
         onClick={toggleMarked}
-        className={
-          (styles.cardButton,
-          isMarked ? styles.cardButtonMarked : styles.cardButton)
-        }
+        className={isMarked ? styles.cardButtonMarked : styles.cardButton}
       >
         Delete
       </button>

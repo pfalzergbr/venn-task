@@ -7,7 +7,8 @@ export type ViewActionTypes =
   | { type: 'REORDER'; payload: { result: DropResult } }
   | { type: 'MARK_VIEW'; payload: { id: string } }
   | { type: 'DELETE_MARKED' }
-  | { type: 'EDIT_VIEW'; payload: ViewTypes };
+  | { type: 'EDIT_VIEW'; payload: ViewTypes }
+  | { type: 'POPULATE_VIEWS'; payload: ViewTypes[] };
 
 export const viewReducer: Reducer<ViewTypes[], ViewActionTypes> = (
   state,
@@ -57,6 +58,10 @@ export const viewReducer: Reducer<ViewTypes[], ViewActionTypes> = (
         view.id === action.payload.id ? action.payload : view,
       );
       return newState;
+    }
+
+    case 'POPULATE_VIEWS': {
+      return [...action.payload];
     }
 
     default: {
