@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import { ViewContext } from '../../../Context/viewContext';
 import { VImageCarouselAttributes } from '../../../Types/ViewTypes';
-import { createVImageCarousel } from '../../../Utils/createVTextBox';
+import { createVImageCarousel } from '../../../Utils/createView';
 
 export interface AddCarouselModalProps {
   closeModal: () => void;

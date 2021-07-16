@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { useForm, useFormState } from 'react-hook-form';
 import { ViewContext } from '../../../Context/viewContext';
 import { TwitterPicker } from 'react-color';
-import { createVImageWithPadding } from '../../../Utils/createVTextBox';
+import { createVImageWithPadding } from '../../../Utils/createView';
 import { VImageWithPaddingAttributes } from '../../../Types/ViewTypes';
 
 export interface AddImageModalProps {

@@ -3,7 +3,7 @@ import { useForm, useFormState } from 'react-hook-form';
 import { useContext } from 'react';
 import { ViewContext } from '../../../Context/viewContext';
 import { TwitterPicker } from 'react-color';
-import { createVTextBox } from '../../../Utils/createVTextBox';
+import { createVTextBox } from '../../../Utils/createView';
 import {
   TextAlignmentType,
   VTextBoxAttributes,
