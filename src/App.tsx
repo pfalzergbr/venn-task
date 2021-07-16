@@ -7,8 +7,12 @@ import './App.css';
 import { ViewContext } from './Context/viewContext';
 
 function App() {
-  const { viewData } = useContext(ViewContext);
+  const { viewData, loading } = useContext(ViewContext);
 
+  // console.log(viewData);
+  if (loading) {
+    return <p>Loading</p>;
+  }
   return (
     <div className="App">
       <Header />

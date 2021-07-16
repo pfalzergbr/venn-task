@@ -53,6 +53,7 @@ export const viewReducer: Reducer<ViewTypes[], ViewActionTypes> = (
       return state.filter(view => !view.isMarked);
     }
 
+    // Editing existing views
     case 'EDIT_VIEW': {
       const newState = state.map(view =>
         view.id === action.payload.id ? action.payload : view,
@@ -60,6 +61,7 @@ export const viewReducer: Reducer<ViewTypes[], ViewActionTypes> = (
       return newState;
     }
 
+    // Populate views from the API
     case 'POPULATE_VIEWS': {
       return [...action.payload];
     }

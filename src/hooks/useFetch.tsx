@@ -1,4 +1,6 @@
 import { useState, useCallback } from 'react';
+import { ViewTypes } from '../Types/ViewTypes';
+import { normalizePostData } from '../Utils/normalizer';
 
 export const useFetch = (url: string) => {
   const [data, setData] = useState<any>(null);
@@ -6,6 +8,7 @@ export const useFetch = (url: string) => {
   const [error, setError] = useState(null);
 
   const fetchData = useCallback(async () => {
+    setError(null);
     setIsLoading(true);
     try {
       const response = await fetch(url, {
@@ -19,15 +22,37 @@ export const useFetch = (url: string) => {
       const data = await response.json();
       setData(data);
     } catch (error) {
-      setError(error);
+      console.log(error);
+      setError(error.message);
     } finally {
       setIsLoading(false);
     }
   }, [url]);
 
+  const persistData = async (data: ViewTypes[]) => {
+    const normalizedData = normalizePostData(data);
+    setError(null);
+    setIsLoading(true);
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Authorization: '2032',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(normalizedData),
+      });
+      return response;
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // useEffect(() => {
   //   fetchData(url);
   // }, [url]);
 
-  return { fetchData, data, loading, error };
+  return { fetchData, persistData, data, loading, error };
 };
