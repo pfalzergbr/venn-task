@@ -1,6 +1,12 @@
+import { useContext } from 'react';
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from 'react-beautiful-dnd';
 import { ViewTypes } from '../Types/ViewTypes';
-import { v4 as uuidv4 } from 'uuid';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { ViewContext } from '../Context/viewContext';
 import VImageCarousel from './Views/VImageCarousel';
 import VImageWithPadding from './Views/VImageWithPadding';
 import VTextBox from './Views/VTextBox';
@@ -14,7 +20,11 @@ export interface ViewListProps {
 // Generating a unique key with uuid, since the API doesn't give us any id or reasonably
 // unique value. Indexes are hacky, so went with uuid.
 const ViewList: React.FC<ViewListProps> = ({ viewData }) => {
-  const handleDragEnd = () => {};
+  const { dispatch } = useContext(ViewContext);
+
+  const handleDragEnd = (result: DropResult) => {
+    dispatch({ type: 'REORDER', payload: { result } });
+  };
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
@@ -74,6 +84,7 @@ const ViewList: React.FC<ViewListProps> = ({ viewData }) => {
 
               return null;
             })}
+            {provided.placeholder}
           </ul>
         )}
       </Droppable>
