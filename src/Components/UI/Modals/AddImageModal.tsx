@@ -4,35 +4,75 @@ import { useForm, useFormState } from 'react-hook-form';
 import { ViewContext } from '../../../Context/viewContext';
 import { TwitterPicker } from 'react-color';
 import { createVImageWithPadding } from '../../../Utils/createVTextBox';
+import { VImageWithPaddingAttributes } from '../../../Types/ViewTypes';
 
 export interface AddImageModalProps {
   closeModal: () => void;
+  id?: string;
+  imageAttributes?: VImageWithPaddingAttributes;
+  isEditing?: boolean | undefined;
 }
 
-const AddImageModal: React.FC<AddImageModalProps> = ({ closeModal }) => {
+export interface IImageData {
+  imageUrl: string;
+  padding: number;
+}
+
+const AddImageModal: React.FC<AddImageModalProps> = ({
+  closeModal,
+  id,
+  imageAttributes = {},
+  isEditing,
+}) => {
   const { dispatch } = useContext(ViewContext);
-  const [backroundColor, setBackgroundColor] = useState('#000000');
+  const [backroundColor, setBackgroundColor] = useState(
+    imageAttributes.backgroundColor
+      ? imageAttributes.backgroundColor.hex
+      : '#000000',
+  );
+
+  const defaultValues = {
+    imageUrl: imageAttributes.imageUrl || '',
+    padding: imageAttributes.padding || 16,
+  };
 
   const {
     register,
     handleSubmit,
     // formState: { errors },
     control,
-  } = useForm({ mode: 'onChange' });
+  } = useForm({ mode: 'onChange', defaultValues });
   const { isValid } = useFormState({ control });
 
   const handleBackgroundColorChange = (color: any) => {
     setBackgroundColor(color.hex);
   };
 
-  const onSubmit = (data: any) => {
+  const addView = (data: IImageData) => {
     const newView = createVImageWithPadding({
       ...data,
       backgroundColor: { hex: backroundColor },
       link: { payload: 'where it points', type: 'image' },
     });
-    console.log(newView);
+
     dispatch({ type: 'ADD_VIEW', payload: newView });
+  };
+
+  const editView = (data: IImageData) => {
+    const newView = createVImageWithPadding(
+      {
+        ...data,
+        backgroundColor: { hex: backroundColor },
+        link: { payload: 'where it points', type: 'image' },
+      },
+      id,
+    );
+
+    dispatch({ type: 'EDIT_VIEW', payload: newView });
+  };
+
+  const onSubmit = (data: IImageData) => {
+    isEditing ? editView(data) : addView(data);
     closeModal();
   };
 
@@ -67,7 +107,7 @@ const AddImageModal: React.FC<AddImageModalProps> = ({ closeModal }) => {
             Cancel
           </button>
           <button type="submit" disabled={!isValid}>
-            Add View
+            {isEditing ? 'Edit View' : 'Add View'}
           </button>
         </div>
       </form>

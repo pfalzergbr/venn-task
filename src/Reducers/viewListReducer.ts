@@ -53,9 +53,10 @@ export const viewReducer: Reducer<ViewTypes[], ViewActionTypes> = (
     }
 
     case 'EDIT_VIEW': {
-      return state.map(view =>
+      const newState = state.map(view =>
         view.id === action.payload.id ? action.payload : view,
       );
+      return newState;
     }
 
     default: {

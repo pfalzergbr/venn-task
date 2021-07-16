@@ -11,6 +11,7 @@ import {
 
 export interface AddTextBoxModalProps {
   closeModal: () => void;
+  id?: string;
   textBoxAttributes?: VTextBoxAttributes;
   isEditing?: boolean | undefined;
 }
@@ -28,9 +29,16 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
   closeModal,
   textBoxAttributes = {},
   isEditing,
+  id,
 }) => {
-  const [backroundColor, setBackgroundColor] = useState('#000000');
-  const [fontColor, setFontColor] = useState('#000000');
+  const [backroundColor, setBackgroundColor] = useState(
+    textBoxAttributes.backgroundColor
+      ? textBoxAttributes.backgroundColor.hex
+      : '#000000',
+  );
+  const [fontColor, setFontColor] = useState(
+    textBoxAttributes.fontColor ? textBoxAttributes.fontColor.hex : '#000000',
+  );
   const { dispatch } = useContext(ViewContext);
 
   const defaultValues: ITextBoxData = {
@@ -67,11 +75,14 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
   };
 
   const editView = (data: ITextBoxData) => {
-    const editedView = createVTextBox({
-      ...data,
-      backgroundColor: { hex: backroundColor },
-      fontColor: { hex: fontColor },
-    });
+    const editedView = createVTextBox(
+      {
+        ...data,
+        backgroundColor: { hex: backroundColor },
+        fontColor: { hex: fontColor },
+      },
+      id,
+    );
     dispatch({ type: 'EDIT_VIEW', payload: editedView });
   };
 
@@ -149,7 +160,7 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
             Cancel
           </button>
           <button type="submit" disabled={!isValid}>
-            Add View
+            {isEditing ? 'Edit View' : 'Add View'}
           </button>
         </div>
       </form>

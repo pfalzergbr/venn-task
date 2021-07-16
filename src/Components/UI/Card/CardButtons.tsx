@@ -1,7 +1,11 @@
 import { useContext, useState } from 'react';
 import Modal from 'react-modal';
 import { ViewContext } from '../../../Context/viewContext';
-import { ViewTypes, VTextBoxAttributes } from '../../../Types/ViewTypes';
+import {
+  ViewTypes,
+  VImageWithPaddingAttributes,
+  VTextBoxAttributes,
+} from '../../../Types/ViewTypes';
 import styles from './styles/CardButtons.module.css';
 import AddTextBoxModal from '../Modals/AddTextBoxModal';
 import AddImageModal from '../Modals/AddImageModal';
@@ -35,11 +39,17 @@ const CardButtons: React.FC<CardButtonsProps> = ({ view }) => {
           <AddTextBoxModal
             closeModal={closeModal}
             textBoxAttributes={view.attributes as VTextBoxAttributes}
+            id={view.id}
             isEditing={true}
           />
         )}
         {moduleType === 'VImageWithPadding' && (
-          <AddImageModal closeModal={closeModal} />
+          <AddImageModal
+            closeModal={closeModal}
+            imageAttributes={view.attributes as VImageWithPaddingAttributes}
+            id={view.id}
+            isEditing={true}
+          />
         )}
         {moduleType === 'VImageCarousel' && (
           <AddCarouselModal closeModal={closeModal} />

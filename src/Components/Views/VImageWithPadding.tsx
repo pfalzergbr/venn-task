@@ -23,7 +23,7 @@ const VImageWithPadding: React.FC<VImageWithPaddingProps> = ({ viewData }) => {
   };
 
   return (
-    <Card view={viewData}>
+    <Card view={viewData} style={{background: backgroundHex}}>
       <img
         style={imageStyle}
         src={imageUrl}

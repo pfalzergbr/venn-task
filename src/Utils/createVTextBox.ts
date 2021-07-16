@@ -6,16 +6,20 @@ import {
   VTextBoxAttributes,
 } from '../Types/ViewTypes';
 
-export const createVTextBox = (data: VTextBoxAttributes): ViewTypes => ({
-  id: uuidv4(),
+export const createVTextBox = (
+  data: VTextBoxAttributes,
+  id?: string,
+): ViewTypes => ({
+  id: id || uuidv4(),
   moduleType: 'VTextBox',
   attributes: data,
 });
 
 export const createVImageWithPadding = (
   data: VImageWithPaddingAttributes,
+  id?: string,
 ): ViewTypes => ({
-  id: uuidv4(),
+  id: id || uuidv4(),
   moduleType: 'VImageWithPadding',
   attributes: data,
   heightMultiplier: 1.25,
