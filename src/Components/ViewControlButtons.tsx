@@ -4,6 +4,7 @@ import { ViewContext } from '../Context/viewContext';
 import AddTextBoxModal from './UI/Modals/AddTextBoxModal';
 import AddImageModal from './UI/Modals/AddImageModal';
 import AddCarouselModal from './UI/Modals/AddCarouselModal';
+import styles from './styles/ViewControlButtons.module.css';
 
 export interface ViewControlButtonsProps {}
 
@@ -37,10 +38,27 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
           <AddCarouselModal closeModal={closeModal} />
         )}
       </Modal>
-      <button onClick={() => openModal('textbox')}>Add Texbox</button>
-      <button onClick={() => openModal('image')}>Add Image</button>
-      <button onClick={() => openModal('carousel')}>Add Carausel</button>
-      <button onClick={handleDelete}>Delete Marked Views</button>
+      <button
+        className={styles.controlButton}
+        onClick={() => openModal('textbox')}
+      >
+        Add Texbox
+      </button>
+      <button
+        className={styles.controlButton}
+        onClick={() => openModal('image')}
+      >
+        Add Image
+      </button>
+      <button
+        className={styles.controlButton}
+        onClick={() => openModal('carousel')}
+      >
+        Add Carausel
+      </button>
+      <button className={styles.controlButtonDanger} onClick={handleDelete}>
+        Delete Marked Views
+      </button>
     </div>
   );
 };

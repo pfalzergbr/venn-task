@@ -1,0 +1,15 @@
+.title {
+  font-family: 'Roboto';
+  color: #2c3e50;
+  margin: 0 auto 5rem;
+  width: 50rem;
+}
+
+.title h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.title h2 {
+  font-size: 2rem;
+}

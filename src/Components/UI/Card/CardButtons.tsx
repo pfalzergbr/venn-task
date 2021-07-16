@@ -63,11 +63,16 @@ const CardButtons: React.FC<CardButtonsProps> = ({ view }) => {
       </Modal>
       <button
         onClick={toggleMarked}
-        className={isMarked ? styles.cardButtonMarked : styles.cardButton}
+        className={
+          (styles.cardButton,
+          isMarked ? styles.cardButtonMarked : styles.cardButton)
+        }
       >
-        Mark
+        Delete
       </button>
-      <button onClick={openModal}>Edit</button>
+      <button onClick={openModal} className={styles.cardButton}>
+        Edit
+      </button>
     </div>
   );
 };
