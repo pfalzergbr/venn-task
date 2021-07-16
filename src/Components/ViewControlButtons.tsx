@@ -1,8 +1,6 @@
 import { useContext, useState } from 'react';
 import Modal from 'react-modal';
 import { ViewContext } from '../Context/viewContext';
-// import { mockView } from '../test-utils/data/mockData';
-// import { ViewTypes } from '../Types/ViewTypes';
 import AddTextBoxModal from './UI/Modals/AddTextBoxModal';
 import AddImageModal from './UI/Modals/AddImageModal';
 import AddCarouselModal from './UI/Modals/AddCarouselModal';

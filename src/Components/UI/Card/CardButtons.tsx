@@ -1,28 +1,56 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import Modal from 'react-modal';
 import { ViewContext } from '../../../Context/viewContext';
+import { ViewTypes, VTextBoxAttributes } from '../../../Types/ViewTypes';
 import styles from './styles/CardButtons.module.css';
+import AddTextBoxModal from '../Modals/AddTextBoxModal';
+import AddImageModal from '../Modals/AddImageModal';
+import AddCarouselModal from '../Modals/AddCarouselModal';
 
 export interface CardButtonsProps {
-  id: string;
-  isMarked: boolean | undefined;
+  view: ViewTypes;
 }
 
-const CardButtons: React.FC<CardButtonsProps> = ({ isMarked, id }) => {
+const CardButtons: React.FC<CardButtonsProps> = ({ view }) => {
+  const { isMarked, id, moduleType } = view;
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { dispatch } = useContext(ViewContext);
 
   const toggleMarked = () => {
-    dispatch({ type: 'MARK_VIEW', payload: { id } });
+    if (id) dispatch({ type: 'MARK_VIEW', payload: { id } });
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <div className={styles.cardButtonContainer}>
+      <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
+        {moduleType === 'VTextBox' && (
+          <AddTextBoxModal
+            closeModal={closeModal}
+            textBoxAttributes={view.attributes as VTextBoxAttributes}
+          />
+        )}
+        {moduleType === 'VImageWithPadding' && (
+          <AddImageModal closeModal={closeModal} />
+        )}
+        {moduleType === 'VImageCarousel' && (
+          <AddCarouselModal closeModal={closeModal} />
+        )}
+      </Modal>
       <button
         onClick={toggleMarked}
         className={isMarked ? styles.cardButtonMarked : styles.cardButton}
       >
         Mark
       </button>
-      <button>Edit</button>
+      <button onClick={openModal}>Edit</button>
     </div>
   );
 };

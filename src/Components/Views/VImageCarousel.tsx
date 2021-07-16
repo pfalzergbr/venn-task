@@ -31,7 +31,7 @@ const VImageCarousel: React.FC<VImageCarouselProps> = ({ viewData }) => {
   };
 
   return (
-    <Card id={viewData.id!} isMarked={viewData.isMarked} style={divStyle}>
+    <Card view={viewData} style={divStyle}>
       <Carousel showThumbs={false}>
         {images.map(image => (
           <div key={uuidv4()} style={imageContainerStyle}>

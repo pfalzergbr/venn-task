@@ -27,7 +27,7 @@ const VTextBox: React.FC<VTextBoxProps> = ({ viewData }) => {
   };
 
   return (
-    <Card isMarked={viewData.isMarked} id={viewData.id!} style={textBoxStyle}>
+    <Card view={viewData} style={textBoxStyle}>
       <div>
         <p>{bodyText}</p>
       </div>
