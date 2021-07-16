@@ -31,7 +31,7 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
 
   return (
     <div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
+      <Modal className="modal" isOpen={isModalOpen} onRequestClose={closeModal}>
         {modalType === 'textbox' && <AddTextBoxModal closeModal={closeModal} />}
         {modalType === 'image' && <AddImageModal closeModal={closeModal} />}
         {modalType === 'carousel' && (

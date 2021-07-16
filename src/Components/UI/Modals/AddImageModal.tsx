@@ -5,6 +5,7 @@ import { ViewContext } from '../../../Context/viewContext';
 import { TwitterPicker } from 'react-color';
 import { createVImageWithPadding } from '../../../Utils/createView';
 import { VImageWithPaddingAttributes } from '../../../Types/ViewTypes';
+import styles from './styles/Modal.module.css';
 
 export interface AddImageModalProps {
   closeModal: () => void;
@@ -78,14 +79,24 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="imageUrl">Image Url</label>
-          <input type="text" {...register('imageUrl', { required: true })} />
-        </div>
-        <div>
-          <label htmlFor="padding">Padding</label>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <h2 className={styles.title}>Add Image</h2>
+        <div className={styles.formControl}>
+          <label className={styles.labelText} htmlFor="imageUrl">
+            Image Url
+          </label>
           <input
+            className={styles.inputField}
+            type="text"
+            {...register('imageUrl', { required: true })}
+          />
+        </div>
+        <div className={styles.formControl}>
+          <label className={styles.labelText} htmlFor="padding">
+            Padding
+          </label>
+          <input
+            className={styles.inputField}
             type="number"
             step="1"
             min="1"
@@ -94,19 +105,29 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
             {...register('padding', { required: true })}
           />
         </div>
-        <div>
-          <label htmlFor="backgroundColor">Background Color</label>
+        <div className={styles.formControl}>
+          <label className={styles.labelText} htmlFor="backgroundColor">
+            Background Color
+          </label>
           <TwitterPicker
             color={backroundColor}
             onChangeComplete={handleBackgroundColorChange}
           />
         </div>
 
-        <div>
-          <button type="button" onClick={closeModal}>
+        <div className={styles.buttonContainer}>
+          <button
+            className={styles.ghostButton}
+            type="button"
+            onClick={closeModal}
+          >
             Cancel
           </button>
-          <button type="submit" disabled={!isValid}>
+          <button
+            className={styles.actionButton}
+            type="submit"
+            disabled={!isValid}
+          >
             {isEditing ? 'Edit View' : 'Add View'}
           </button>
         </div>

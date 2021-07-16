@@ -1,0 +1,65 @@
+/* .modal {
+  border: 1px solid red;
+} */
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 5rem;
+}
+
+.title {
+  font-size: 2.5rem;
+}
+
+.formControl {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputField {
+  outline: none;
+  border: none;
+  border-radius: 1px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.labelText {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.buttonContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.actionButton {
+  color: #fff;
+  background-color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.actionButton:disabled {
+  background-color: fff;
+}
+
+.ghostButton {
+  color: #2c3e50;
+  border: 1px solid #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.imageList {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding-left: 0;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
+.imageThumbnail {
+  margin-bottom: 1rem;
+}

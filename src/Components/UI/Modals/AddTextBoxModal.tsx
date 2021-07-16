@@ -8,6 +8,7 @@ import {
   TextAlignmentType,
   VTextBoxAttributes,
 } from '../../../Types/ViewTypes';
+import styles from './styles/Modal.module.css';
 
 export interface AddTextBoxModalProps {
   closeModal: () => void;
@@ -88,24 +89,32 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
 
   const onSubmit = (data: ITextBoxData) => {
     isEditing ? editView(data) : addView(data);
+    // handlePersistData();
     closeModal();
   };
 
   // Todo - Extract input fields
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="formControl">
-          <label htmlFor="bodyText">Body Text:</label>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <h2 className={styles.title}>Add Carousel</h2>
+        <div className={styles.formControl}>
+          <label className={styles.labelText} htmlFor="bodyText">
+            Body Text:
+          </label>
           <textarea
+            className={styles.inputField}
             id="bodyText"
             {...register('bodyText', { required: true })}
           />
           <p role="alert">{errors['bodyText']?.message}</p>
         </div>
-        <div>
-          <label htmlFor="textAlignment">Text alignment</label>
+        <div className={styles.formControl}>
+          <label className={styles.labelText} htmlFor="textAlignment">
+            Text alignment
+          </label>
           <select
+            className={styles.inputField}
             id="textAlignment"
             defaultValue="left"
             {...register('textAlignment', { required: true })}
@@ -115,9 +124,12 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
             <option value="center">Center</option>
           </select>
         </div>
-        <div>
-          <label htmlFor="fontSize">Font Size</label>
+        <div className={styles.formControl}>
+          <label className={styles.labelText} htmlFor="fontSize">
+            Font Size
+          </label>
           <input
+            className={styles.inputField}
             type="number"
             step="1"
             min="1"
@@ -126,9 +138,12 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
             {...register('fontSize', { required: true })}
           />
         </div>
-        <div>
-          <label htmlFor="padding">Padding</label>
+        <div className={styles.formControl}>
+          <label className={styles.labelText} htmlFor="padding">
+            Padding
+          </label>
           <input
+            className={styles.inputField}
             type="number"
             step="1"
             min="1"
@@ -137,29 +152,43 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
             {...register('padding', { required: true })}
           />
         </div>
-        <div>
-          <label htmlFor="capitalised">Capitalised</label>
+        <div className={styles.formControl}>
+          <label className={styles.labelText} htmlFor="capitalised">
+            Capitalised
+          </label>
           <input type="checkbox" {...register('capitalised')} />
         </div>
-        <div>
-          <label htmlFor="backgroundColor">Background Color</label>
+        <div className={styles.formControl}>
+          <label className={styles.labelText} htmlFor="backgroundColor">
+            Background Color
+          </label>
           <TwitterPicker
             color={backroundColor}
             onChangeComplete={handleBackgroundColorChange}
           />
         </div>
-        <div>
-          <label htmlFor="fontColor">Font Color</label>
+        <div className={styles.formControl}>
+          <label className={styles.labelText} htmlFor="fontColor">
+            Font Color
+          </label>
           <TwitterPicker
             color={fontColor}
             onChangeComplete={handleFontColorChange}
           />
         </div>
-        <div>
-          <button type="button" onClick={closeModal}>
+        <div className={styles.buttonContainer}>
+          <button
+            className={styles.ghostButton}
+            type="button"
+            onClick={closeModal}
+          >
             Cancel
           </button>
-          <button type="submit" disabled={!isValid}>
+          <button
+            className={styles.actionButton}
+            type="submit"
+            disabled={!isValid}
+          >
             {isEditing ? 'Edit View' : 'Add View'}
           </button>
         </div>

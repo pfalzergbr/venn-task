@@ -32,7 +32,7 @@ export const useFetch = (url: string) => {
   const persistData = async (data: ViewTypes[]) => {
     const normalizedData = normalizePostData(data);
     setError(null);
-    setIsLoading(true);
+    // setIsLoading(true);
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -40,13 +40,15 @@ export const useFetch = (url: string) => {
           Authorization: '2032',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(normalizedData),
+        body: await JSON.stringify(normalizedData),
       });
+      const data = await response.json();
+      console.log(response, data);
       return response;
     } catch (error) {
       setError(error.message);
     } finally {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   };
 

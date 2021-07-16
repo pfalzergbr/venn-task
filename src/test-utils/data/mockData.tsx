@@ -2,7 +2,7 @@ import { ViewTypes } from '../../Types/ViewTypes';
 
 // Dummy data fetched with Postman from the API. These are used to provide mocks in tests,
 // and use in development process before data fetching is wired up.
-export const mockData: ViewTypes[] = [
+const mockData: ViewTypes[] = [
   {
     id: '1',
     moduleType: 'VTextBox',

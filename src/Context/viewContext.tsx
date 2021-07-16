@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext, useEffect, useCallback } from 'react';
 import { useViewList } from '../hooks/useViewList';
 import { ViewTypes } from '../Types/ViewTypes';
 import { ViewActionTypes } from '../Reducers/viewListReducer';
@@ -25,8 +25,13 @@ export interface ViewProviderProps {
 
 export const ViewProvider = ({ children }: { children: React.ReactNode }) => {
   const { viewList, dispatch } = useViewList();
-  const { data, fetchData, loading, error } = useFetch(
+  const { data, fetchData, loading, error, persistData } = useFetch(
     'https://venn-interviews-server.herokuapp.com/json',
+  );
+
+  const handlePersistData = useCallback(
+    () => persistData(viewList),
+    [viewList, persistData],
   );
 
   useEffect(() => {
@@ -38,9 +43,18 @@ export const ViewProvider = ({ children }: { children: React.ReactNode }) => {
       dispatch({ type: 'POPULATE_VIEWS', payload: appendViewIds(data) });
   }, [dispatch, data]);
 
+  useEffect(() => {
+    handlePersistData();
+  }, [viewList, handlePersistData]);
+
   return (
     <ViewContext.Provider
-      value={{ viewData: viewList, dispatch, loading, error }}
+      value={{
+        viewData: viewList,
+        dispatch,
+        loading,
+        error,
+      }}
     >
       {children}
     </ViewContext.Provider>

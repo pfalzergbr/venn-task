@@ -35,7 +35,7 @@ const CardButtons: React.FC<CardButtonsProps> = ({ view }) => {
 
   return (
     <div className={styles.cardButtonContainer}>
-      <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
+      <Modal className="modal" isOpen={isModalOpen} onRequestClose={closeModal}>
         {moduleType === 'VTextBox' && (
           <AddTextBoxModal
             closeModal={closeModal}
