@@ -1,5 +1,5 @@
 import { IVTextBox } from '../../Types/ViewTypes';
-import Card from '../UI/Card';
+import Card from '../UI/Card/Card';
 
 export interface VTextBoxProps {
   viewData: IVTextBox;
@@ -27,7 +27,7 @@ const VTextBox: React.FC<VTextBoxProps> = ({ viewData }) => {
   };
 
   return (
-    <Card style={textBoxStyle}>
+    <Card isMarked={viewData.isMarked} id={viewData.id!} style={textBoxStyle}>
       <div>
         <p>{bodyText}</p>
       </div>

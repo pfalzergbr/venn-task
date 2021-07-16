@@ -48,6 +48,7 @@ export interface IVTextBox extends IView {
   id?: string;
   moduleType: 'VTextBox';
   attributes: VTextBoxAttributes;
+  isMarked?: boolean;
 }
 
 export interface IVImageWithPadding {
@@ -55,6 +56,7 @@ export interface IVImageWithPadding {
   moduleType: 'VImageWithPadding';
   attributes: VImageWithPaddingAttributes;
   heightMultiplier: number;
+  isMarked?: boolean;
 }
 
 export interface IVImageCarousel {
@@ -62,4 +64,5 @@ export interface IVImageCarousel {
   moduleType: 'VImageCarousel';
   attributes: VImageCarouselAttributes;
   heightMultiplier: number;
+  isMarked?: boolean;
 }

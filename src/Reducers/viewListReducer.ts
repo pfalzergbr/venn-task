@@ -4,7 +4,8 @@ import { ViewTypes } from '../Types/ViewTypes';
 
 export type ViewActionTypes =
   | { type: 'ADD_VIEW'; payload: ViewTypes }
-  | { type: 'REORDER'; payload: { result: DropResult } };
+  | { type: 'REORDER'; payload: { result: DropResult } }
+  | { type: 'MARK_VIEW'; payload: { id: string } };
 
 export const viewReducer: Reducer<ViewTypes[], ViewActionTypes> = (
   state,
@@ -14,6 +15,7 @@ export const viewReducer: Reducer<ViewTypes[], ViewActionTypes> = (
     case 'ADD_VIEW': {
       return [...state, action.payload];
     }
+
     case 'REORDER': {
       const { result } = action.payload;
 
@@ -26,6 +28,20 @@ export const viewReducer: Reducer<ViewTypes[], ViewActionTypes> = (
         views.splice(result.destination.index, 0, movedView);
       return views;
     }
+
+    case 'MARK_VIEW': {
+      const view = state.find(item => item.id === action.payload.id);
+      if (!view) return state;
+
+      const newState = state.map(item =>
+        item.id === action.payload.id
+          ? { ...view, isMarked: !view.isMarked }
+          : item,
+      );
+
+      return newState;
+    }
+
     default: {
       return state;
     }

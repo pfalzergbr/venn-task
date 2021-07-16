@@ -1,0 +1,13 @@
+.cardButtonContainer {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.cardButton {
+  margin-right: 0.5rem;
+}
+
+.cardButtonMarked {
+  background-color: red;
+}

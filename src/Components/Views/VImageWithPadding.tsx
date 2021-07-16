@@ -1,5 +1,5 @@
 import { IVImageWithPadding } from '../../Types/ViewTypes';
-import Card from '../UI/Card';
+import Card from '../UI/Card/Card';
 
 export interface VImageWithPaddingProps {
   viewData: IVImageWithPadding;
@@ -23,7 +23,7 @@ const VImageWithPadding: React.FC<VImageWithPaddingProps> = ({ viewData }) => {
   };
 
   return (
-    <Card>
+    <Card isMarked={viewData.isMarked} id={viewData.id!}>
       <img
         style={imageStyle}
         src={imageUrl}
