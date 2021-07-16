@@ -27,8 +27,9 @@ export const createVImageWithPadding = (
 
 export const createVImageCarousel = (
   data: VImageCarouselAttributes,
+  id?: string,
 ): ViewTypes => ({
-  id: uuidv4(),
+  id: id || uuidv4(),
   moduleType: 'VImageCarousel',
   attributes: data,
   heightMultiplier: 1.25,

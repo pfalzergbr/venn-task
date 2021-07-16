@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { ViewContext } from '../../../Context/viewContext';
 import {
   ViewTypes,
+  VImageCarouselAttributes,
   VImageWithPaddingAttributes,
   VTextBoxAttributes,
 } from '../../../Types/ViewTypes';
@@ -52,7 +53,12 @@ const CardButtons: React.FC<CardButtonsProps> = ({ view }) => {
           />
         )}
         {moduleType === 'VImageCarousel' && (
-          <AddCarouselModal closeModal={closeModal} />
+          <AddCarouselModal
+            closeModal={closeModal}
+            carouselAttributes={view.attributes as VImageCarouselAttributes}
+            id={view.id}
+            isEditing={true}
+          />
         )}
       </Modal>
       <button

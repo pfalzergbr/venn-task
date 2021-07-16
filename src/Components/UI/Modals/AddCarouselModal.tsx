@@ -1,29 +1,56 @@
 import { useState } from 'react';
 import { useContext } from 'react';
 import { ViewContext } from '../../../Context/viewContext';
+import { VImageCarouselAttributes } from '../../../Types/ViewTypes';
 import { createVImageCarousel } from '../../../Utils/createVTextBox';
 
 export interface AddCarouselModalProps {
   closeModal: () => void;
+  id?: string;
+  carouselAttributes?: VImageCarouselAttributes;
+  isEditing?: boolean | undefined;
 }
 
-const AddCarouselModal: React.FC<AddCarouselModalProps> = ({ closeModal }) => {
+const AddCarouselModal: React.FC<AddCarouselModalProps> = ({
+  closeModal,
+  id,
+  carouselAttributes = {},
+  isEditing,
+}) => {
   const { dispatch } = useContext(ViewContext);
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>(
+    carouselAttributes.images ? carouselAttributes.images : [],
+  );
   const [imageInputState, setImageInputState] = useState<string>('');
-  const [paddingInputState, setPaddingInputState] = useState<number>(0);
+  const [paddingInputState, setPaddingInputState] = useState<number>(
+    carouselAttributes.padding ? carouselAttributes.padding : 16,
+  );
 
   const addImageUrl = () => {
     setImageUrls(images => [...images, imageInputState]);
   };
 
-  const handleSubmit = () => {
+  const addCarousel = () => {
     const newView = createVImageCarousel({
       padding: paddingInputState,
       images: imageUrls,
     });
-    console.log(newView);
     dispatch({ type: 'ADD_VIEW', payload: newView });
+  };
+
+  const editCarousel = () => {
+    const newView = createVImageCarousel(
+      {
+        padding: paddingInputState,
+        images: imageUrls,
+      },
+      id,
+    );
+    dispatch({ type: 'EDIT_VIEW', payload: newView });
+  };
+
+  const handleSubmit = () => {
+    isEditing ? editCarousel() : addCarousel();
     closeModal();
   };
 
@@ -50,13 +77,16 @@ const AddCarouselModal: React.FC<AddCarouselModalProps> = ({ closeModal }) => {
         {imageUrls.map(imageUrl => (
           <li>
             <div>
-              <p>{imageUrl}</p>
+              <img src={imageUrl} alt="" style={{ height: '100px' }} />
+              <button>X</button>
             </div>
           </li>
         ))}
       </ul>
       <div>
-        <button onClick={handleSubmit}>Submit</button>
+        <button onClick={handleSubmit}>
+          {isEditing ? 'Edit View' : 'Add View'}
+        </button>
         <button onClick={closeModal}>Cancel</button>
       </div>
     </div>
