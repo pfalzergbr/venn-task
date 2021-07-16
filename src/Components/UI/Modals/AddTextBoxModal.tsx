@@ -4,23 +4,36 @@ import { useContext } from 'react';
 import { ViewContext } from '../../../Context/viewContext';
 import { TwitterPicker } from 'react-color';
 import { createVTextBox } from '../../../Utils/createVTextBox';
-import { VTextBoxAttributes } from '../../../Types/ViewTypes';
+import {
+  TextAlignmentType,
+  VTextBoxAttributes,
+} from '../../../Types/ViewTypes';
 
 export interface AddTextBoxModalProps {
   closeModal: () => void;
   textBoxAttributes?: VTextBoxAttributes;
+  isEditing?: boolean | undefined;
+}
+
+export interface ITextBoxData {
+  bodyText: string;
+  textAlignment: TextAlignmentType;
+  fontSize: number;
+  padding: number;
+  capitalised: boolean;
 }
 
 //Todo - Refactor this when ready
 const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
   closeModal,
   textBoxAttributes = {},
+  isEditing,
 }) => {
   const [backroundColor, setBackgroundColor] = useState('#000000');
   const [fontColor, setFontColor] = useState('#000000');
   const { dispatch } = useContext(ViewContext);
 
-  const defaultValues = {
+  const defaultValues: ITextBoxData = {
     bodyText: textBoxAttributes.bodyText || '',
     textAlignment: textBoxAttributes.textAlignment || 'left',
     fontSize: textBoxAttributes.fontSize || 16,
@@ -44,14 +57,26 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
     setFontColor(color.hex);
   };
 
-  const onSubmit = (data: any) => {
+  const addView = (data: ITextBoxData) => {
     const newView = createVTextBox({
       ...data,
       backgroundColor: { hex: backroundColor },
       fontColor: { hex: fontColor },
     });
-    console.log(newView);
     dispatch({ type: 'ADD_VIEW', payload: newView });
+  };
+
+  const editView = (data: ITextBoxData) => {
+    const editedView = createVTextBox({
+      ...data,
+      backgroundColor: { hex: backroundColor },
+      fontColor: { hex: fontColor },
+    });
+    dispatch({ type: 'EDIT_VIEW', payload: editedView });
+  };
+
+  const onSubmit = (data: ITextBoxData) => {
+    isEditing ? editView(data) : addView(data);
     closeModal();
   };
 

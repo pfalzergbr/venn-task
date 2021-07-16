@@ -6,7 +6,8 @@ export type ViewActionTypes =
   | { type: 'ADD_VIEW'; payload: ViewTypes }
   | { type: 'REORDER'; payload: { result: DropResult } }
   | { type: 'MARK_VIEW'; payload: { id: string } }
-  | { type: 'DELETE_MARKED' };
+  | { type: 'DELETE_MARKED' }
+  | { type: 'EDIT_VIEW'; payload: ViewTypes };
 
 export const viewReducer: Reducer<ViewTypes[], ViewActionTypes> = (
   state,
@@ -49,6 +50,12 @@ export const viewReducer: Reducer<ViewTypes[], ViewActionTypes> = (
     // Handles deletion of all marked items
     case 'DELETE_MARKED': {
       return state.filter(view => !view.isMarked);
+    }
+
+    case 'EDIT_VIEW': {
+      return state.map(view =>
+        view.id === action.payload.id ? action.payload : view,
+      );
     }
 
     default: {

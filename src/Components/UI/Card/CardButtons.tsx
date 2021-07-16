@@ -35,6 +35,7 @@ const CardButtons: React.FC<CardButtonsProps> = ({ view }) => {
           <AddTextBoxModal
             closeModal={closeModal}
             textBoxAttributes={view.attributes as VTextBoxAttributes}
+            isEditing={true}
           />
         )}
         {moduleType === 'VImageWithPadding' && (
