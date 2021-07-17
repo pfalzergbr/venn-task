@@ -3,7 +3,6 @@ import { useViewList } from '../hooks/useViewList';
 import { ViewTypes } from '../Types/ViewTypes';
 import { ViewActionTypes } from '../Reducers/viewListReducer';
 import { useFetch } from '../hooks/useFetch';
-import { appendViewIds } from '../Utils/normalizer';
 
 export interface IViewContext {
   viewData: ViewTypes[];
@@ -39,8 +38,7 @@ export const ViewProvider = ({ children }: { children: React.ReactNode }) => {
   }, [fetchData]);
 
   useEffect(() => {
-    if (data)
-      dispatch({ type: 'POPULATE_VIEWS', payload: appendViewIds(data) });
+    if (data) dispatch({ type: 'POPULATE_VIEWS', payload: data });
   }, [dispatch, data]);
 
   useEffect(() => {

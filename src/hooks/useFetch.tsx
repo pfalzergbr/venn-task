@@ -1,12 +1,13 @@
 import { useState, useCallback } from 'react';
 import { ViewTypes } from '../Types/ViewTypes';
-import { normalizePostData } from '../Utils/normalizer';
+import { appendViewIds, normalizePostData } from '../Utils/normalizer';
 
 export const useFetch = (url: string) => {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<ViewTypes[] | null>(null);
   const [loading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
+  // Fetching data from the API and populates data state.
   const fetchData = useCallback(async () => {
     setError(null);
     setIsLoading(true);
@@ -20,20 +21,23 @@ export const useFetch = (url: string) => {
       });
 
       const data = await response.json();
-      setData(data);
+      // adds a uuid to fetched objects, for frontend id. API doesn't provide
+      // any unique values to use for keys and ids.
+      const normalizedData = appendViewIds(data);
+      setData(normalizedData);
     } catch (error) {
-      console.log(error);
-      setError(error.message);
+      setError('Cannot fetch views. Please try again.');
     } finally {
       setIsLoading(false);
     }
   }, [url]);
 
+  // Persists data state on the API
   const persistData = async (data: ViewTypes[]) => {
+    // Removes id and isMarked properties from the array of views.
+    // Only used on the frontend, database doesn't accept it.
     const normalizedData = normalizePostData(data);
     setError(null);
-    console.log(data);
-    // setIsLoading(true);
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -47,8 +51,6 @@ export const useFetch = (url: string) => {
       return data;
     } catch (error) {
       setError(error.message);
-    } finally {
-      // setIsLoading(false);
     }
   };
 

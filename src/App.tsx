@@ -7,10 +7,14 @@ import './App.css';
 import { ViewContext } from './Context/viewContext';
 
 function App() {
-  const { viewData, loading } = useContext(ViewContext);
+  const { viewData, loading, error } = useContext(ViewContext);
 
   if (loading) {
     return <p>Loading</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
   }
   return (
     <div className="App">
