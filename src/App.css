@@ -10,16 +10,3 @@ button {
   padding: 1rem 2rem;
   cursor: pointer;
 }
-
-.modal {
-  width: 50%;
-  /* padding: 5rem; */
-  border-radius: 5rem;
-  height: 90rem;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translate(50%, -50%);
-  background: #ecf0f1;
-  box-shadow: 5px 5px 10px grey;
-}

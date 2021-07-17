@@ -11,6 +11,7 @@ import styles from './styles/CardButtons.module.css';
 import AddTextBoxModal from '../Modals/AddTextBoxModal';
 import AddImageModal from '../Modals/AddImageModal';
 import AddCarouselModal from '../Modals/AddCarouselModal';
+import { modalContent, modalOverlay } from '../Modals/styles/modal';
 
 export interface CardButtonsProps {
   view: ViewTypes;
@@ -35,7 +36,11 @@ const CardButtons: React.FC<CardButtonsProps> = ({ view }) => {
 
   return (
     <div className={styles.cardButtonContainer}>
-      <Modal className="modal" isOpen={isModalOpen} onRequestClose={closeModal}>
+      <Modal
+        style={{ content: modalContent, overlay: modalOverlay }}
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+      >
         {moduleType === 'VTextBox' && (
           <AddTextBoxModal
             closeModal={closeModal}

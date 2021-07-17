@@ -5,6 +5,7 @@ import AddTextBoxModal from './UI/Modals/AddTextBoxModal';
 import AddImageModal from './UI/Modals/AddImageModal';
 import AddCarouselModal from './UI/Modals/AddCarouselModal';
 import styles from './styles/ViewControlButtons.module.css';
+import { modalContent, modalOverlay } from './UI/Modals/styles/modal';
 
 export interface ViewControlButtonsProps {}
 
@@ -29,9 +30,32 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
     dispatch({ type: 'DELETE_MARKED' });
   };
 
+  // const modalContent: React.CSSProperties = {
+  //   boxSizing: 'border-box',
+  //   top: '50%',
+  //   left: '50%',
+  //   right: 'auto',
+  //   bottom: 'auto',
+  //   transform: 'translate(-50%, -50%)',
+  //   border: 'none',
+  //   padding: '0',
+  //   overflow: 'hidden',
+  //   backgroundColor: '#ecf0f1',
+  // };
+
+  // const modalOverlay: React.CSSProperties = {
+  //   backgroundColor: 'rgba(0, 0, 0, 0.85)',
+  //   height: '100vh',
+  //   width: '100vw',
+  // };
+
   return (
     <div>
-      <Modal className="modal" isOpen={isModalOpen} onRequestClose={closeModal}>
+      <Modal
+        style={{ content: modalContent, overlay: modalOverlay }}
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+      >
         {modalType === 'textbox' && <AddTextBoxModal closeModal={closeModal} />}
         {modalType === 'image' && <AddImageModal closeModal={closeModal} />}
         {modalType === 'carousel' && (
