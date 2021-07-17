@@ -3,7 +3,8 @@
   color: #fff;
 }
 
-.controlButton:hover {
+.controlButton:hover,
+.controlButton:focus {
   background-color: #95a5a6;
 }
 
@@ -12,6 +13,12 @@
   background-color: #c0392b;
 }
 
-.controlButtonDanger:hover {
+.controlButtonDanger:disabled {
+  color: #ccc;
+  background-color: #bdc3c7;
+}
+
+.controlButtonDanger:hover,
+.controlButtonDanger:focus {
   background-color: #e74c3c;
 }

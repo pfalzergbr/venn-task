@@ -68,6 +68,7 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
   } = useForm({ mode: 'onChange', defaultValues });
   const { isValid } = useFormState({ control });
 
+  // TODO - investigate this any
   const handleBackgroundColorChange = (color: any) => {
     setBackgroundColor(color.hex);
   };
@@ -111,6 +112,7 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
           name="bodyText"
           labelText="Body Text"
           register={register}
+          required={true}
           errors={errors}
         />
         <SelectFieldRHF
