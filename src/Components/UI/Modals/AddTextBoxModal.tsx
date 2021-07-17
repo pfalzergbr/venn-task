@@ -10,6 +10,7 @@ import {
 } from '../../../Types/ViewTypes';
 import styles from './styles/Modal.module.css';
 import InputFieldRHF from '../Forms/InputFieldRHF';
+import SelectFieldRHF, { SelectOption } from '../Forms/SelectFieldRHF';
 
 export interface AddTextBoxModalProps {
   closeModal: () => void;
@@ -43,6 +44,12 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
     textBoxAttributes.fontColor ? textBoxAttributes.fontColor.hex : '#000000',
   );
   const { dispatch } = useContext(ViewContext);
+
+  const alignmentOptions: SelectOption[] = [
+    { label: 'Left', value: 'left' },
+    { label: 'Right', value: 'right' },
+    { label: 'Center', value: 'center' },
+  ];
 
   const defaultValues: ITextBoxData = {
     bodyText: textBoxAttributes.bodyText || '',
@@ -100,7 +107,6 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
     <div>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h2 className={styles.title}>Add Carousel</h2>
-        {/* <InputFieldRHF name="bodyText" /> */}
         <div className={styles.formControl}>
           <label className={styles.labelText} htmlFor="bodyText">
             Body Text:
@@ -112,20 +118,12 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
           />
           <p role="alert">{errors['bodyText']?.message}</p>
         </div>
-        <div className={styles.formControl}>
-          <label className={styles.labelText} htmlFor="textAlignment">
-            Text alignment
-          </label>
-          <select
-            className={styles.inputField}
-            id="textAlignment"
-            {...register('textAlignment', { required: true })}
-          >
-            <option value="left">Left</option>
-            <option value="right">Right</option>
-            <option value="center">Center</option>
-          </select>
-        </div>
+        <SelectFieldRHF
+          name="textAlignment"
+          labelText="Text Alignment"
+          register={register}
+          options={alignmentOptions}
+        />
         <InputFieldRHF
           name="fontSize"
           labelText="Font Size"
