@@ -28,6 +28,7 @@ const InputFieldRHF: React.FC<InputFieldRHFProps<any>> = ({
       </label>
       <input
         className={styles.inputField}
+        id={name}
         type={type}
         step={type === 'number' ? '1' : undefined}
         min={type === 'number' ? min : undefined}

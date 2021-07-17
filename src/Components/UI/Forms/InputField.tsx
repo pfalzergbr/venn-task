@@ -23,6 +23,7 @@ const InputField: React.FC<InputFieldProps> = ({
       <input
         className={styles.inputField}
         type="type"
+        id={name}
         name={name}
         value={inputState}
         step={type === 'number' ? '1' : undefined}

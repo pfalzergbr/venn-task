@@ -134,7 +134,7 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
           register={register}
           type="number"
           min="1"
-          max="50"
+          max="250"
           required={true}
         />
         <InputFieldRHF

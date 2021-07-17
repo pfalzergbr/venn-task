@@ -6,6 +6,7 @@ import { TwitterPicker } from 'react-color';
 import { createVImageWithPadding } from '../../../Utils/createView';
 import { VImageWithPaddingAttributes } from '../../../Types/ViewTypes';
 import styles from './styles/Modal.module.css';
+import InputFieldRHF from '../Forms/InputFieldRHF';
 
 export interface AddImageModalProps {
   closeModal: () => void;
@@ -81,30 +82,21 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
     <div>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h2 className={styles.title}>Add Image</h2>
-        <div className={styles.formControl}>
-          <label className={styles.labelText} htmlFor="imageUrl">
-            Image Url
-          </label>
-          <input
-            className={styles.inputField}
-            type="text"
-            {...register('imageUrl', { required: true })}
-          />
-        </div>
-        <div className={styles.formControl}>
-          <label className={styles.labelText} htmlFor="padding">
-            Padding
-          </label>
-          <input
-            className={styles.inputField}
-            type="number"
-            step="1"
-            min="1"
-            max="50"
-            defaultValue="16"
-            {...register('padding', { required: true })}
-          />
-        </div>
+        <InputFieldRHF
+          name="imageUrl"
+          labelText="Image Url"
+          register={register}
+          required
+        />
+        <InputFieldRHF
+          name="padding"
+          labelText="Padding"
+          register={register}
+          type="number"
+          min="1"
+          max="250"
+          required={true}
+        />
         <div className={styles.formControl}>
           <label className={styles.labelText} htmlFor="backgroundColor">
             Background Color
