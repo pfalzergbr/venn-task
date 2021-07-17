@@ -30,25 +30,6 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
     dispatch({ type: 'DELETE_MARKED' });
   };
 
-  // const modalContent: React.CSSProperties = {
-  //   boxSizing: 'border-box',
-  //   top: '50%',
-  //   left: '50%',
-  //   right: 'auto',
-  //   bottom: 'auto',
-  //   transform: 'translate(-50%, -50%)',
-  //   border: 'none',
-  //   padding: '0',
-  //   overflow: 'hidden',
-  //   backgroundColor: '#ecf0f1',
-  // };
-
-  // const modalOverlay: React.CSSProperties = {
-  //   backgroundColor: 'rgba(0, 0, 0, 0.85)',
-  //   height: '100vh',
-  //   width: '100vw',
-  // };
-
   return (
     <div>
       <Modal
