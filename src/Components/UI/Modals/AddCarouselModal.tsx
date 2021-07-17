@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { ViewContext } from '../../../Context/viewContext';
 import { VImageCarouselAttributes } from '../../../Types/ViewTypes';
 import { createVImageCarousel } from '../../../Utils/createView';
+import InputField from '../Forms/InputField';
 import CarouselThumbnailList from './CarouselThumbnailList';
 import styles from './styles/Modal.module.css';
 
@@ -56,45 +57,43 @@ const AddCarouselModal: React.FC<AddCarouselModalProps> = ({
     closeModal();
   };
 
+  const handlePaddingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPaddingInputState(parseInt(e.target.value));
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setImageInputState(e.target.value);
+  };
+
   return (
     <div className={styles.carouselForm}>
-      <div className={styles.inputField}>
-        <h2 className={styles.title}>Add Carousel</h2>
-        <div className={styles.formControl}>
-          <label className={styles.labelText} htmlFor="padding">
-            Padding
-          </label>
-          <input
-            className={styles.inputField}
-            type="number"
-            value={paddingInputState}
-            step="1"
-            onChange={e => setPaddingInputState(parseInt(e.target.value))}
-          />
-        </div>
-        <div className={styles.formControl}>
-          <label className={styles.labelText} htmlFor="imageUrl">
-            Add an Image Url
-          </label>
-          <input
-            className={styles.inputField}
-            type="text"
-            value={imageInputState}
-            onChange={e => setImageInputState(e.target.value)}
-          />
-          <button className={styles.ghostButton} onClick={addImageUrl}>
-            Add Image
-          </button>
-        </div>
-        <CarouselThumbnailList imageUrls={imageUrls} />
-        <div className={styles.buttonContainer}>
-          <button className={styles.actionButton} onClick={handleSubmit}>
-            {isEditing ? 'Edit View' : 'Add View'}
-          </button>
-          <button className={styles.ghostButton} onClick={closeModal}>
-            Cancel
-          </button>
-        </div>
+      <h2 className={styles.title}>Add Carousel</h2>
+      <InputField
+        name="padding"
+        labelText="Padding"
+        inputState={paddingInputState}
+        handleChange={handlePaddingChange}
+        type="number"
+      />
+      <InputField
+        name="imageUrl"
+        labelText="Add Image Url"
+        inputState={imageInputState}
+        handleChange={handleImageChange}
+      />
+      <div className={styles.formControl}>
+        <button className={styles.ghostButton} onClick={addImageUrl}>
+          Add Image
+        </button>
+      </div>
+      <CarouselThumbnailList imageUrls={imageUrls} />
+      <div className={styles.buttonContainer}>
+        <button className={styles.actionButton} onClick={handleSubmit}>
+          {isEditing ? 'Edit View' : 'Add View'}
+        </button>
+        <button className={styles.ghostButton} onClick={closeModal}>
+          Cancel
+        </button>
       </div>
     </div>
   );
