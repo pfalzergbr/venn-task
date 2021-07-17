@@ -11,6 +11,7 @@ import {
 import styles from './styles/Modal.module.css';
 import InputFieldRHF from '../Forms/InputFieldRHF';
 import SelectFieldRHF, { SelectOption } from '../Forms/SelectFieldRHF';
+import TextFieldRHF from '../Forms/TextFieldRHF';
 
 export interface AddTextBoxModalProps {
   closeModal: () => void;
@@ -98,7 +99,6 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
 
   const onSubmit = (data: ITextBoxData) => {
     isEditing ? editView(data) : addView(data);
-    // handlePersistData();
     closeModal();
   };
 
@@ -106,18 +106,13 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
   return (
     <div>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <h2 className={styles.title}>Add Carousel</h2>
-        <div className={styles.formControl}>
-          <label className={styles.labelText} htmlFor="bodyText">
-            Body Text:
-          </label>
-          <textarea
-            className={styles.inputField}
-            id="bodyText"
-            {...register('bodyText', { required: true })}
-          />
-          <p role="alert">{errors['bodyText']?.message}</p>
-        </div>
+        <h2 className={styles.title}>Add Textbox</h2>
+        <TextFieldRHF
+          name="bodyText"
+          labelText="Body Text"
+          register={register}
+          errors={errors}
+        />
         <SelectFieldRHF
           name="textAlignment"
           labelText="Text Alignment"
