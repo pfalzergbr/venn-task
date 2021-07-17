@@ -9,6 +9,7 @@ import {
   VTextBoxAttributes,
 } from '../../../Types/ViewTypes';
 import styles from './styles/Modal.module.css';
+import InputFieldRHF from '../Forms/InputFieldRHF';
 
 export interface AddTextBoxModalProps {
   closeModal: () => void;
@@ -25,7 +26,8 @@ export interface ITextBoxData {
   capitalised: boolean;
 }
 
-//Todo - Refactor this when ready
+//Pretty complex. Handling Color pickers in a separate state at this point. With more time available, I would explore
+// controlled components in React Hook Form to make them play nice together.
 const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
   closeModal,
   textBoxAttributes = {},
@@ -35,7 +37,7 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
   const [backroundColor, setBackgroundColor] = useState(
     textBoxAttributes.backgroundColor
       ? textBoxAttributes.backgroundColor.hex
-      : '#000000',
+      : '#fff',
   );
   const [fontColor, setFontColor] = useState(
     textBoxAttributes.fontColor ? textBoxAttributes.fontColor.hex : '#000000',
@@ -98,6 +100,7 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
     <div>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h2 className={styles.title}>Add Carousel</h2>
+        {/* <InputFieldRHF name="bodyText" /> */}
         <div className={styles.formControl}>
           <label className={styles.labelText} htmlFor="bodyText">
             Body Text:
@@ -116,7 +119,6 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
           <select
             className={styles.inputField}
             id="textAlignment"
-            defaultValue="left"
             {...register('textAlignment', { required: true })}
           >
             <option value="left">Left</option>
@@ -124,40 +126,30 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
             <option value="center">Center</option>
           </select>
         </div>
-        <div className={styles.formControl}>
-          <label className={styles.labelText} htmlFor="fontSize">
-            Font Size
-          </label>
-          <input
-            className={styles.inputField}
-            type="number"
-            step="1"
-            min="1"
-            max="50"
-            defaultValue="16"
-            {...register('fontSize', { required: true })}
-          />
-        </div>
-        <div className={styles.formControl}>
-          <label className={styles.labelText} htmlFor="padding">
-            Padding
-          </label>
-          <input
-            className={styles.inputField}
-            type="number"
-            step="1"
-            min="1"
-            max="50"
-            defaultValue="16"
-            {...register('padding', { required: true })}
-          />
-        </div>
-        <div className={styles.formControl}>
-          <label className={styles.labelText} htmlFor="capitalised">
-            Capitalised
-          </label>
-          <input type="checkbox" {...register('capitalised')} />
-        </div>
+        <InputFieldRHF
+          name="fontSize"
+          labelText="Font Size"
+          register={register}
+          type="number"
+          min="1"
+          max="50"
+          required={true}
+        />
+        <InputFieldRHF
+          name="padding"
+          labelText="Padding"
+          register={register}
+          type="number"
+          min="1"
+          max="50"
+          required={true}
+        />
+        <InputFieldRHF
+          name="capitalised"
+          labelText="Capitalised"
+          register={register}
+          type="checkbox"
+        />
         <div className={styles.formControl}>
           <label className={styles.labelText} htmlFor="backgroundColor">
             Background Color
