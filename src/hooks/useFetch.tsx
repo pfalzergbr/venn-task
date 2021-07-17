@@ -32,6 +32,7 @@ export const useFetch = (url: string) => {
   const persistData = async (data: ViewTypes[]) => {
     const normalizedData = normalizePostData(data);
     setError(null);
+    console.log(data);
     // setIsLoading(true);
     try {
       const response = await fetch(url, {
@@ -43,18 +44,13 @@ export const useFetch = (url: string) => {
         body: await JSON.stringify(normalizedData),
       });
       const data = await response.json();
-      console.log(response, data);
-      return response;
+      return data;
     } catch (error) {
       setError(error.message);
     } finally {
       // setIsLoading(false);
     }
   };
-
-  // useEffect(() => {
-  //   fetchData(url);
-  // }, [url]);
 
   return { fetchData, persistData, data, loading, error };
 };

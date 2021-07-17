@@ -44,7 +44,7 @@ export const ViewProvider = ({ children }: { children: React.ReactNode }) => {
   }, [dispatch, data]);
 
   useEffect(() => {
-    handlePersistData();
+    if (viewList.length !== 0) handlePersistData();
   }, [viewList, handlePersistData]);
 
   return (

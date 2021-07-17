@@ -9,7 +9,6 @@ import { ViewContext } from './Context/viewContext';
 function App() {
   const { viewData, loading } = useContext(ViewContext);
 
-  // console.log(viewData);
   if (loading) {
     return <p>Loading</p>;
   }
