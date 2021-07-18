@@ -12,7 +12,7 @@ export interface CardProps {
 // With more time available, I would rethink where CardButtons live
 const Card: React.FC<CardProps> = ({ children, style, view }) => {
   return (
-    <div className={styles.card} style={style}>
+    <div className={styles.card} style={style} data-testid="card">
       {children}
       <CardButtons view={view} />
     </div>

@@ -48,7 +48,6 @@ export const useFetch = (url: string) => {
         body: await JSON.stringify(normalizedData),
       });
       const data = await response.json();
-      console.log(data);
       return data;
     } catch (error) {
       setError(error.message);
