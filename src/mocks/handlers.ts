@@ -12,7 +12,7 @@ export const handlers = [
   rest.post(
     'https://venn-interviews-server.herokuapp.com/json',
     (req, res, ctx) => {
-      console.log('intercepted a post request!');
+      return res(ctx.json(req.body));
     },
   ),
 
