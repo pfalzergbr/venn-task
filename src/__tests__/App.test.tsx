@@ -94,7 +94,7 @@ describe('TextBox', () => {
     userEvent.type(bodyText, 'Hello there!');
     const submitButton = await screen.findByTestId('add-view');
     userEvent.click(submitButton);
-    const cards = await screen.findAllByTestId('card');
+    // const cards = await screen.findAllByTestId('card');
     // expect(cards).toHaveLength(4);
     // expect(cards[3]).toHaveTextContent(/hello there/i);
   });

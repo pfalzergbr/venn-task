@@ -130,8 +130,8 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
           labelText="Padding"
           register={register}
           type="number"
-          min="1"
-          max="250"
+          min="0"
+          max="100"
           required={true}
         />
         <SelectFieldRHF

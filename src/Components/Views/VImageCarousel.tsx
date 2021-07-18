@@ -15,19 +15,19 @@ const VImageCarousel: React.FC<VImageCarouselProps> = ({ viewData }) => {
   const { padding, images } = viewData.attributes;
 
   const imageStyle: React.CSSProperties = {
-    objectFit: 'cover',
+    objectFit: 'scale-down',
   };
 
   //Temporary divStyle before the container is built
   const divStyle: React.CSSProperties = {
-    padding,
+    padding: `${padding}px`,
     textAlign: 'center',
     margin: '0 auto',
   };
 
   // TODO - figure out heights
   const imageContainerStyle: React.CSSProperties = {
-    height: `${BASE_HEIGHT * viewData.heightMultiplier}px'`,
+    height: `${BASE_HEIGHT}px'`,
   };
 
   return (

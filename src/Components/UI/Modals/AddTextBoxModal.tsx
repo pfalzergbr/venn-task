@@ -68,7 +68,6 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
   } = useForm({ mode: 'onChange', defaultValues });
   const { isValid } = useFormState({ control });
 
-  // TODO - investigate this any
   const handleBackgroundColorChange = (color: any) => {
     setBackgroundColor(color.hex);
   };
@@ -139,8 +138,8 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
           labelText="Padding"
           register={register}
           type="number"
-          min="1"
-          max="250"
+          min="0"
+          max="100"
           required={true}
         />
         <InputFieldRHF
