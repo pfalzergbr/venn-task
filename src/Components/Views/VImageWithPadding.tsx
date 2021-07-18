@@ -19,7 +19,7 @@ const VImageWithPadding: React.FC<VImageWithPaddingProps> = ({ viewData }) => {
   const imageStyle: React.CSSProperties = {
     background: backgroundHex,
     padding: padding,
-    height: `${BASE_HEIGHT * viewData.heightMultiplier}px`,
+    height: `${BASE_HEIGHT}px`,
   };
 
   return (

@@ -11,7 +11,7 @@ export type FontcolorType = {
 
 export type LinkType = {
   payload: string;
-  type: string;
+  type: 'category' | 'product';
 };
 export type ViewTypes = IVTextBox | IVImageWithPadding | IVImageCarousel;
 

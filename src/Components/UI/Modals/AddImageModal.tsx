@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useForm, useFormState } from 'react-hook-form';
 import { ViewContext } from '../../../Context/viewContext';
+import { useHeightMultiplier } from '../../../hooks/useHeightMultiplier';
 import { TwitterPicker } from 'react-color';
 import { createVImageWithPadding } from '../../../Utils/createView';
 import { VImageWithPaddingAttributes } from '../../../Types/ViewTypes';
 import styles from './styles/Modal.module.css';
 import InputFieldRHF from '../Forms/InputFieldRHF';
+import SelectFieldRHF from '../Forms/SelectFieldRHF';
 
 export interface AddImageModalProps {
   closeModal: () => void;
@@ -18,6 +19,8 @@ export interface AddImageModalProps {
 export interface IImageData {
   imageUrl: string;
   padding: number;
+  linkType: 'category' | 'product';
+  payload: string;
 }
 
 const AddImageModal: React.FC<AddImageModalProps> = ({
@@ -36,15 +39,25 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
   const defaultValues = {
     imageUrl: imageAttributes.imageUrl || '',
     padding: imageAttributes.padding || 16,
+    linkType: imageAttributes.link ? imageAttributes.link.type : 'product',
+    payload: imageAttributes.link ? imageAttributes.link.payload : '',
   };
 
   const {
     register,
     handleSubmit,
+    watch,
     // formState: { errors },
     control,
   } = useForm({ mode: 'onChange', defaultValues });
   const { isValid } = useFormState({ control });
+
+  const watchImage: string = watch('imageUrl');
+  const watchLinkType = watch('linkType');
+
+  const { imageRef, heightMultiplier } = useHeightMultiplier(watchImage);
+
+  console.log(heightMultiplier);
 
   const handleBackgroundColorChange = (color: any) => {
     setBackgroundColor(color.hex);
@@ -52,9 +65,10 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
 
   const addView = (data: IImageData) => {
     const newView = createVImageWithPadding({
-      ...data,
+      imageUrl: data.imageUrl,
+      padding: data.padding,
       backgroundColor: { hex: backroundColor },
-      link: { payload: 'where it points', type: 'image' },
+      link: { payload: data.payload, type: data.linkType },
     });
 
     dispatch({ type: 'ADD_VIEW', payload: newView });
@@ -63,9 +77,10 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
   const editView = (data: IImageData) => {
     const newView = createVImageWithPadding(
       {
-        ...data,
+        imageUrl: data.imageUrl,
+        padding: data.padding,
         backgroundColor: { hex: backroundColor },
-        link: { payload: 'where it points', type: 'image' },
+        link: { payload: data.payload, type: data.linkType },
       },
       id,
     );
@@ -78,6 +93,11 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
     closeModal();
   };
 
+  const linkOptions = [
+    { value: 'product', label: 'Product' },
+    { value: 'catetory', label: 'Category' },
+  ];
+
   return (
     <div>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -88,6 +108,18 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
           register={register}
           required
         />
+        <div className={styles.imageContainer}>
+          {watchImage ? (
+            <img
+              ref={imageRef}
+              src={watchImage}
+              className={styles.imageThumbnailLarge}
+              alt="Please provide a valid link"
+            />
+          ) : (
+            <p>Please add an image!</p>
+          )}
+        </div>
         <InputFieldRHF
           name="padding"
           labelText="Padding"
@@ -97,6 +129,28 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
           max="250"
           required={true}
         />
+        <SelectFieldRHF
+          name="linkType"
+          labelText="Link Type"
+          register={register}
+          required
+          options={linkOptions}
+        />
+        {watchLinkType === 'product' ? (
+          <InputFieldRHF
+            name="payload"
+            labelText="Product Id"
+            register={register}
+            required
+          />
+        ) : (
+          <InputFieldRHF
+            name="payload"
+            labelText="Category Id"
+            register={register}
+            required
+          />
+        )}
         <div className={styles.formControl}>
           <label className={styles.labelText} htmlFor="backgroundColor">
             Background Color
