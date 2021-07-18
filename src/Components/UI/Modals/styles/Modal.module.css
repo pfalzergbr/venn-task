@@ -1,7 +1,9 @@
 .form {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 5rem;
+  z-index: 5;
 }
 
 .carouselForm {

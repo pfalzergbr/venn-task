@@ -15,4 +15,5 @@ export const modalOverlay: React.CSSProperties = {
   backgroundColor: 'rgba(0, 0, 0, 0.85)',
   height: '100vh',
   width: '100vw',
+  zIndex: 5,
 };
