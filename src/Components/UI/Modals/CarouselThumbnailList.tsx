@@ -13,13 +13,18 @@ const CarouselThumbnailList: React.FC<CarouselThumbnailListProps> = ({
     <ul className={styles.imageList}>
       {imageUrls.map((imageUrl, index) => (
         <li key={index}>
-          <div>
+          <div className={styles.imageThumbnailContainer}>
             <img
               className={styles.imageThumbnail}
               src={imageUrl}
               alt={imageUrl}
             />
-            <button onClick={() => removeImageUrl(index)}>X</button>
+            <button
+              className={styles.imageThumbnailCloseButton}
+              onClick={() => removeImageUrl(index)}
+            >
+              X
+            </button>
           </div>
         </li>
       ))}
