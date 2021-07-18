@@ -106,7 +106,11 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
   // Todo - Extract input fields
   return (
     <div>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit(onSubmit)}
+        data-testid="textbox-form"
+      >
         <h2 className={styles.title}>Add Textbox</h2>
         <TextFieldRHF
           name="bodyText"
@@ -172,6 +176,7 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
             Cancel
           </button>
           <button
+            data-testid="add-view"
             className={styles.actionButton}
             type="submit"
             disabled={!isValid}

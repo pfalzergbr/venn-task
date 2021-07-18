@@ -33,7 +33,8 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
   return (
     <div>
       <Modal
-        appElement={document.getElementById('app') || undefined}
+        // appElement={document.getElementById('root') || undefined}
+        ariaHideApp={false}
         style={{ content: modalContent, overlay: modalOverlay }}
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -47,6 +48,7 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
       <button
         className={styles.controlButton}
         onClick={() => openModal('textbox')}
+        data-testid="add-textbox"
       >
         Add Texbox
       </button>
