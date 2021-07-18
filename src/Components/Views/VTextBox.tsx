@@ -27,7 +27,6 @@ const VTextBox: React.FC<VTextBoxProps> = ({ viewData }) => {
     textAlign: textAlignment,
   };
 
-  console.log(padding);
   return (
     <Card view={viewData} style={textBoxStyle}>
       <div>
