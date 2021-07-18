@@ -37,6 +37,7 @@ const CardButtons: React.FC<CardButtonsProps> = ({ view }) => {
   return (
     <div className={styles.cardButtonContainer}>
       <Modal
+        // appElement="#root"
         style={{ content: modalContent, overlay: modalOverlay }}
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -78,5 +79,7 @@ const CardButtons: React.FC<CardButtonsProps> = ({ view }) => {
     </div>
   );
 };
+
+// Modal.setAppElement('#root');
 
 export default CardButtons;

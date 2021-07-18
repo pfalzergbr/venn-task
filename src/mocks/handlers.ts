@@ -1,10 +1,11 @@
 import { rest } from 'msw';
+import { mockData } from './mockData';
 
 export const handlers = [
   rest.get(
     'https://venn-interviews-server.herokuapp.com/json',
     (req, res, ctx) => {
-      'intercepted a get request!';
+      return res(ctx.json(mockData));
     },
   ),
 
@@ -14,4 +15,8 @@ export const handlers = [
       console.log('intercepted a post request!');
     },
   ),
+
+  rest.options('*', (req, res, ctx) => {
+    console.log('options request intercepted');
+  }),
 ];
