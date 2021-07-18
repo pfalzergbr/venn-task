@@ -17,12 +17,13 @@ export const createVTextBox = (
 
 export const createVImageWithPadding = (
   data: VImageWithPaddingAttributes,
+  heightMultiplier: number,
   id?: string,
 ): ViewTypes => ({
   id: id || uuidv4(),
   moduleType: 'VImageWithPadding',
   attributes: data,
-  heightMultiplier: 1.25,
+  heightMultiplier,
 });
 
 export const createVImageCarousel = (

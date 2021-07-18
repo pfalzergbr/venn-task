@@ -43,38 +43,31 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
     payload: imageAttributes.link ? imageAttributes.link.payload : '',
   };
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    // formState: { errors },
-    control,
-  } = useForm({ mode: 'onChange', defaultValues });
+  const linkOptions = [
+    { value: 'product', label: 'Product' },
+    { value: 'catetory', label: 'Category' },
+  ];
+
+  const { register, handleSubmit, watch, control } = useForm({
+    mode: 'onChange',
+    defaultValues,
+  });
   const { isValid } = useFormState({ control });
 
+  // Watchers
   const watchImage: string = watch('imageUrl');
   const watchLinkType = watch('linkType');
-
-  const { imageRef, heightMultiplier } = useHeightMultiplier(watchImage);
-
-  console.log(heightMultiplier);
+  // custom hook to calculate heightMultipliers
+  const { imageRef, heightMultiplier, onImageError, isImage } =
+    useHeightMultiplier(watchImage);
+  const formIsValid: boolean = !(isValid && heightMultiplier);
 
   const handleBackgroundColorChange = (color: any) => {
     setBackgroundColor(color.hex);
   };
 
   const addView = (data: IImageData) => {
-    const newView = createVImageWithPadding({
-      imageUrl: data.imageUrl,
-      padding: data.padding,
-      backgroundColor: { hex: backroundColor },
-      link: { payload: data.payload, type: data.linkType },
-    });
-
-    dispatch({ type: 'ADD_VIEW', payload: newView });
-  };
-
-  const editView = (data: IImageData) => {
+    if (!heightMultiplier) return;
     const newView = createVImageWithPadding(
       {
         imageUrl: data.imageUrl,
@@ -82,6 +75,22 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
         backgroundColor: { hex: backroundColor },
         link: { payload: data.payload, type: data.linkType },
       },
+      heightMultiplier,
+    );
+
+    dispatch({ type: 'ADD_VIEW', payload: newView });
+  };
+
+  const editView = (data: IImageData) => {
+    if (!heightMultiplier) return;
+    const newView = createVImageWithPadding(
+      {
+        imageUrl: data.imageUrl,
+        padding: data.padding,
+        backgroundColor: { hex: backroundColor },
+        link: { payload: data.payload, type: data.linkType },
+      },
+      heightMultiplier,
       id,
     );
 
@@ -92,11 +101,6 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
     isEditing ? editView(data) : addView(data);
     closeModal();
   };
-
-  const linkOptions = [
-    { value: 'product', label: 'Product' },
-    { value: 'catetory', label: 'Category' },
-  ];
 
   return (
     <div>
@@ -109,8 +113,9 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
           required
         />
         <div className={styles.imageContainer}>
-          {watchImage ? (
+          {watchImage && isImage ? (
             <img
+              onError={onImageError}
               ref={imageRef}
               src={watchImage}
               className={styles.imageThumbnailLarge}
@@ -172,7 +177,7 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
           <button
             className={styles.actionButton}
             type="submit"
-            disabled={!isValid}
+            disabled={formIsValid}
           >
             {isEditing ? 'Edit View' : 'Add View'}
           </button>
