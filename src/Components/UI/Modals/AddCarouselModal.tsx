@@ -33,6 +33,14 @@ const AddCarouselModal: React.FC<AddCarouselModalProps> = ({
     setImageUrls(images => [...images, imageInputState]);
   };
 
+  const removeImageUrl = (index: number) => {
+    setImageUrls(state => {
+      const newState = [...state];
+      newState.splice(index, 1);
+      return newState;
+    });
+  };
+
   const addCarousel = () => {
     const newView = createVImageCarousel({
       padding: paddingInputState,
@@ -86,7 +94,10 @@ const AddCarouselModal: React.FC<AddCarouselModalProps> = ({
           Add Image
         </button>
       </div>
-      <CarouselThumbnailList imageUrls={imageUrls} />
+      <CarouselThumbnailList
+        imageUrls={imageUrls}
+        removeImageUrl={removeImageUrl}
+      />
       <div className={styles.buttonContainer}>
         <button className={styles.actionButton} onClick={handleSubmit}>
           {isEditing ? 'Edit View' : 'Add View'}

@@ -2,10 +2,12 @@ import styles from './styles/Modal.module.css';
 
 export interface CarouselThumbnailListProps {
   imageUrls: string[];
+  removeImageUrl: (index: number) => void;
 }
 
 const CarouselThumbnailList: React.FC<CarouselThumbnailListProps> = ({
   imageUrls,
+  removeImageUrl,
 }) => {
   return (
     <ul className={styles.imageList}>
@@ -17,7 +19,7 @@ const CarouselThumbnailList: React.FC<CarouselThumbnailListProps> = ({
               src={imageUrl}
               alt={imageUrl}
             />
-            {/* <button>X</button> */}
+            <button onClick={() => removeImageUrl(index)}>X</button>
           </div>
         </li>
       ))}
