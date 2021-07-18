@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { ViewContext } from '../Context/viewContext';
 import AddTextBoxModal from './UI/Modals/AddTextBoxModal';
@@ -13,9 +13,16 @@ export type ModalType = 'textbox' | 'image' | 'carousel';
 
 // Button container to control ViewList
 const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
-  const { dispatch } = useContext(ViewContext);
+  const { dispatch, viewData } = useContext(ViewContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState<ModalType>('textbox');
+  const [deleteEnabled, setDeleteEnabled] = useState(false);
+
+  // Controlling Delete Marked Views button disabled state.
+  useEffect(() => {
+    const markExists = viewData.find(view => view.isMarked === true);
+    setDeleteEnabled(!!markExists);
+  }, [viewData]);
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -33,7 +40,7 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
   return (
     <div>
       <Modal
-        // appElement={document.getElementById('root') || undefined}
+        appElement={document.getElementById('root') || undefined}
         ariaHideApp={false}
         style={{ content: modalContent, overlay: modalOverlay }}
         isOpen={isModalOpen}
@@ -64,13 +71,17 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
       >
         Add Carausel
       </button>
-      <button className={styles.controlButtonDanger} onClick={handleDelete}>
+      <button
+        disabled={!deleteEnabled}
+        className={styles.controlButtonDanger}
+        onClick={handleDelete}
+      >
         Delete Marked Views
       </button>
     </div>
   );
 };
 
-Modal.setAppElement('body');
+// Modal.setAppElement('body');
 
 export default ViewControlButtons;

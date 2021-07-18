@@ -13,12 +13,12 @@
   background-color: #c0392b;
 }
 
-.controlButtonDanger:disabled {
-  color: #ccc;
-  background-color: #bdc3c7;
-}
-
 .controlButtonDanger:hover,
 .controlButtonDanger:focus {
   background-color: #e74c3c;
+}
+
+.controlButtonDanger:disabled {
+  color: #fff;
+  background-color: #bdc3c7;
 }
