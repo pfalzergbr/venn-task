@@ -33,7 +33,7 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
   return (
     <div>
       <Modal
-        // appElement="#root"
+        appElement={document.getElementById('app') || undefined}
         style={{ content: modalContent, overlay: modalOverlay }}
         isOpen={isModalOpen}
         onRequestClose={closeModal}

@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '../test-utils/renderWithContext';
+import { render, screen } from '../test-utils/renderWithContext';
 import App from '../App';
 import ViewControlButtons from '../Components/ViewControlButtons';
 import userEvent from '@testing-library/user-event';
@@ -50,4 +50,8 @@ describe('Using card buttons', () => {
     const lastCard = await screen.findByTestId('card');
     expect(lastCard).toBeInTheDocument();
   });
+});
+
+describe('Edit button', () => {
+  test('should edit a VTextBox view', () => {});
 });

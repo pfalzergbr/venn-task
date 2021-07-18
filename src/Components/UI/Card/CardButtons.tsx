@@ -37,7 +37,7 @@ const CardButtons: React.FC<CardButtonsProps> = ({ view }) => {
   return (
     <div className={styles.cardButtonContainer}>
       <Modal
-        // appElement="#root"
+        appElement={document.getElementById('app') || undefined}
         style={{ content: modalContent, overlay: modalOverlay }}
         isOpen={isModalOpen}
         onRequestClose={closeModal}
