@@ -18,14 +18,16 @@ const VTextBox: React.FC<VTextBoxProps> = ({ viewData }) => {
   } = viewData.attributes;
 
   const textBoxStyle: React.CSSProperties = {
+    display: 'flex',
     background: backgroundHex,
     textTransform: capitalised ? 'capitalize' : 'none',
     color: fontColorHex,
     fontSize: fontSize,
-    padding: padding,
+    padding: `${padding}px`,
     textAlign: textAlignment,
   };
 
+  console.log(padding);
   return (
     <Card view={viewData} style={textBoxStyle}>
       <div>
