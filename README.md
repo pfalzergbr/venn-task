@@ -1,6 +1,6 @@
 # Test Challenge
 
-Test Challenge submission by Gabor Pfalzer. Very educational, had a lot of fun with this one.
+Test Challenge submission by [Gabor Pfalzer](https://pfalzer.dev). Very educational, had a lot of fun with this one.
 
 ### The application as specified:
 
@@ -39,8 +39,6 @@ Renders a Carousel of images, where the user can:
 
 - Add multiple images for the carousel. These images show up as a thumbnail, and can be removed one by one before the view is submitted
 - set the Padding.
-
-## State Management
 
 ## External Libraries Used:
 
