@@ -22,7 +22,7 @@ const VTextBox: React.FC<VTextBoxProps> = ({ viewData }) => {
     background: backgroundHex,
     textTransform: capitalised ? 'capitalize' : 'none',
     color: fontColorHex,
-    fontSize: fontSize,
+    fontSize: `${fontSize}px`,
     padding: `${padding}px`,
     textAlign: textAlignment,
   };
