@@ -75,7 +75,9 @@ const AddCarouselModal: React.FC<AddCarouselModalProps> = ({
 
   return (
     <div className={styles.carouselForm}>
-      <h2 className={styles.title}>Add Carousel</h2>
+      <h2 className={styles.title}>
+        {isEditing ? 'Edit Carousel' : 'Add Carousel'}
+      </h2>
       <InputField
         name="padding"
         labelText="Padding"

@@ -110,7 +110,9 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
         onSubmit={handleSubmit(onSubmit)}
         data-testid="textbox-form"
       >
-        <h2 className={styles.title}>Add Textbox</h2>
+        <h2 className={styles.title}>
+          {isEditing ? 'Edit Textbox' : 'Add Textbox'}
+        </h2>
         <TextFieldRHF
           name="bodyText"
           labelText="Body Text"

@@ -57,6 +57,7 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
   // Watchers
   const watchImage: string = watch('imageUrl');
   const watchLinkType = watch('linkType');
+
   // custom hook to calculate heightMultipliers
   const { imageRef, heightMultiplier, onImageError, isImage } =
     useHeightMultiplier(watchImage);
@@ -104,8 +105,14 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
 
   return (
     <div>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <h2 className={styles.title}>Add Image</h2>
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit(onSubmit)}
+        data-testid="image-form"
+      >
+        <h2 className={styles.title}>
+          {isEditing ? 'Edit Image' : 'Add Image'}
+        </h2>
         <InputFieldRHF
           name="imageUrl"
           labelText="Image Url"
@@ -178,6 +185,7 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
             className={styles.actionButton}
             type="submit"
             disabled={formIsValid}
+            data-testid="add-view"
           >
             {isEditing ? 'Edit View' : 'Add View'}
           </button>

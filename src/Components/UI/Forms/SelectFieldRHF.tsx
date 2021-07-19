@@ -28,6 +28,7 @@ const SelectFieldRHF: React.FC<SelectFieldRHFProps<any>> = ({
         {labelText}
       </label>
       <select
+        defaultValue={options[0].value}
         className={styles.inputField}
         id={name}
         {...register(name, { required })}

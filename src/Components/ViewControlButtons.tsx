@@ -40,7 +40,7 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
   return (
     <div>
       <Modal
-        appElement={document.getElementById('root') || undefined}
+        // appElement={document.getElementById('root') || undefined}
         ariaHideApp={false}
         style={{ content: modalContent, overlay: modalOverlay }}
         isOpen={isModalOpen}

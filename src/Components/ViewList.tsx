@@ -17,8 +17,6 @@ export interface ViewListProps {
 }
 
 // Component rendering a list of views.
-// Generating a unique key with uuid, since the API doesn't give us any id or reasonably
-// unique value. Indexes are hacky, so went with uuid.
 const ViewList: React.FC<ViewListProps> = ({ viewData }) => {
   const { dispatch } = useContext(ViewContext);
 
