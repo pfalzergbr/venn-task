@@ -20,8 +20,8 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <ViewList viewData={viewData} />
       <ViewControlButtons />
+      <ViewList viewData={viewData} />
       <Footer />
     </div>
   );

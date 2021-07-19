@@ -38,7 +38,7 @@ const ViewControlButtons: React.FC<ViewControlButtonsProps> = () => {
   };
 
   return (
-    <div>
+    <div className={styles.controlButtonContainer}>
       <Modal
         // appElement={document.getElementById('root') || undefined}
         ariaHideApp={false}
