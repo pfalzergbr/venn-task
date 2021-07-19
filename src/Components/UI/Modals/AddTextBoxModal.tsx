@@ -182,7 +182,7 @@ const AddTextBoxModal: React.FC<AddTextBoxModalProps> = ({
             type="submit"
             disabled={!isValid}
           >
-            {isEditing ? 'Edit View' : 'Add View'}
+            {isEditing ? 'Confirm' : 'Add View'}
           </button>
         </div>
       </form>

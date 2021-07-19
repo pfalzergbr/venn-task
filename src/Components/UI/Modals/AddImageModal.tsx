@@ -187,7 +187,7 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
             disabled={formIsValid}
             data-testid="add-view"
           >
-            {isEditing ? 'Edit View' : 'Add View'}
+            {isEditing ? 'Confirm' : 'Add View'}
           </button>
         </div>
       </form>

@@ -102,7 +102,7 @@ const AddCarouselModal: React.FC<AddCarouselModalProps> = ({
       />
       <div className={styles.buttonContainer}>
         <button className={styles.actionButton} onClick={handleSubmit}>
-          {isEditing ? 'Edit View' : 'Add View'}
+          {isEditing ? 'Confirm' : 'Add View'}
         </button>
         <button className={styles.ghostButton} onClick={closeModal}>
           Cancel
