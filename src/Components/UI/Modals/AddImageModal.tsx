@@ -148,21 +148,14 @@ const AddImageModal: React.FC<AddImageModalProps> = ({
           required
           options={linkOptions}
         />
-        {watchLinkType === 'product' ? (
-          <InputFieldRHF
-            name="payload"
-            labelText="Product Id"
-            register={register}
-            required
-          />
-        ) : (
-          <InputFieldRHF
-            name="payload"
-            labelText="Category Id"
-            register={register}
-            required
-          />
-        )}
+
+        <InputFieldRHF
+          name="payload"
+          labelText={watchLinkType === 'product' ? 'Product Id' : 'Category Id'}
+          register={register}
+          required
+        />
+
         <div className={styles.formControl}>
           <label className={styles.labelText} htmlFor="backgroundColor">
             Background Color
