@@ -41,5 +41,3 @@ export const useHeightMultiplier = (watchImage: string) => {
 
   return { imageRef, heightMultiplier, onImageError, isImage };
 };
-
-// && imageRef.current?.width

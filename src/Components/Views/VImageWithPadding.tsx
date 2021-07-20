@@ -8,7 +8,7 @@ export interface VImageWithPaddingProps {
 
 // View component, rendering image Views.
 const VImageWithPadding: React.FC<VImageWithPaddingProps> = ({ viewData }) => {
-  const BASE_HEIGHT = 350;
+  // const BASE_HEIGHT = 350;
 
   const {
     padding,
@@ -18,7 +18,7 @@ const VImageWithPadding: React.FC<VImageWithPaddingProps> = ({ viewData }) => {
 
   const imageStyle: React.CSSProperties = {
     background: backgroundHex,
-    height: `${BASE_HEIGHT}px`,
+    width: '100%',
     objectFit: 'scale-down',
   };
 
